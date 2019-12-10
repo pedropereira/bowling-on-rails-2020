@@ -3,6 +3,8 @@
 class FrameDecorator
   attr_reader :frame
 
+  delegate :persisted?, to: :frame
+
   def initialize(frame)
     @frame = frame
   end

@@ -5,43 +5,40 @@ require 'spec_helper'
 RSpec.describe GameDecorator do
   describe '#roll' do
     it 'produces a perfect game (only strikes) with two bonus rolls in the final frame' do
-      game = FactoryBot.create(:game)
+      game = create_game
       decorator = described_class.new(game)
 
-      results = 12.times.map do
-        decorator.roll(10)
-      end
+      results = 12.times.map { decorator.roll(10) }
+      game.reload
 
       expect(game.state).to eq('finished')
       expect(results.uniq).to eq([true])
     end
 
     it 'produces a game with a bonus roll after a spare in the final frame' do
-      game = FactoryBot.create(:game)
+      game = create_game
       decorator = described_class.new(game)
 
-      results = 21.times.map do
-        decorator.roll(5)
-      end
+      results = 21.times.map { decorator.roll(5) }
+      game.reload
 
       expect(game.state).to eq('finished')
       expect(results.uniq).to eq([true])
     end
 
     it 'produces a game with no strikes nor spares' do
-      game = FactoryBot.create(:game)
+      game = create_game
       decorator = described_class.new(game)
 
-      results = 20.times.map do
-        decorator.roll(3)
-      end
+      results = 20.times.map { decorator.roll(3) }
+      game.reload
 
       expect(game.state).to eq('finished')
       expect(results.uniq).to eq([true])
     end
 
     it "produces uncle bob's game" do
-      game = FactoryBot.create(:game)
+      game = create_game
       decorator = described_class.new(game)
 
       results = [
@@ -65,9 +62,17 @@ RSpec.describe GameDecorator do
         decorator.roll(8),
         decorator.roll(6)
       ]
+      game.reload
 
       expect(game.state).to eq('finished')
       expect(results.uniq).to eq([true])
     end
+  end
+
+  def create_game
+    game = FactoryBot.create(:game)
+    FactoryBot.create(:frame, game_id: game.id)
+
+    game
   end
 end
