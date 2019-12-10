@@ -5,6 +5,10 @@ class FrameRepository
     Frame.where(attributes)
   end
 
+  def build(attributes = {})
+    Frame.new(attributes)
+  end
+
   def create(attributes = nil)
     Frame.create!(attributes)
   end

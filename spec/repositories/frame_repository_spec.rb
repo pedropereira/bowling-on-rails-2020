@@ -23,6 +23,21 @@ RSpec.describe FrameRepository do
     end
   end
 
+  describe '#build' do
+    it 'builds a new frame' do
+      game = FactoryBot.create(:game)
+
+      result = described_class.new.build(game_id: game.id)
+
+      expect(Frame.count).to eq(0)
+      expect(result.created_at).to eq(nil)
+      expect(result.game_id).to eq(game.id)
+      expect(result.state).to eq('open')
+      expect(result.rolls).to eq([])
+      expect(result.updated_at).to eq(nil)
+    end
+  end
+
   describe '#create' do
     it 'creates a new frame' do
       game = FactoryBot.create(:game)
