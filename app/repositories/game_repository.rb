@@ -5,6 +5,10 @@ class GameRepository
     Game.create!(attributes)
   end
 
+  def find(id)
+    Game.find(id)
+  end
+
   def update(game, attributes)
     game.update!(attributes)
   end

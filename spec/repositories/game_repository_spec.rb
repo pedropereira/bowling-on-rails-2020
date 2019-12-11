@@ -15,6 +15,22 @@ RSpec.describe GameRepository do
     end
   end
 
+  describe '#find' do
+    it 'returns existing game' do
+      game = FactoryBot.create(:game)
+
+      result = described_class.new.find(game.id)
+
+      expect(result).to eq(game)
+    end
+
+    it 'raises ActiveRecord::RecordNotFound exception when game does not exist' do
+      execution = -> { described_class.new.find('does_not_exist') }
+
+      expect(execution).to raise_error(ActiveRecord::RecordNotFound)
+    end
+  end
+
   describe '#update' do
     it 'updates an existing game' do
       game = FactoryBot.create(:game, state: 'ongoing')
