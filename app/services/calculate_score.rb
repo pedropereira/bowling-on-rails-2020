@@ -10,10 +10,9 @@ class CalculateScore
   private
 
   def frame_score(frames, sum, frame, index)
-    case frame.state
-    when Frame::STRIKE
+    if frame.strike?
       sum + pinfall(frame) + pinfall_from_next_two_rolls(frames, index)
-    when Frame::SPARE
+    elsif frame.spare?
       sum + pinfall(frame) + pinfall_from_next_roll(frames, index)
     else
       sum + pinfall(frame)

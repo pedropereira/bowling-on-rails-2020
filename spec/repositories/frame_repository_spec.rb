@@ -12,15 +12,6 @@ RSpec.describe FrameRepository do
 
       expect(result).to eq([frame1, frame2])
     end
-
-    it 'returns filtered frames' do
-      FactoryBot.create(:frame)
-      frame = FactoryBot.create(:frame, state: 'strike')
-
-      result = described_class.new.all(state: 'strike')
-
-      expect(result).to eq([frame])
-    end
   end
 
   describe '#build' do
@@ -32,7 +23,6 @@ RSpec.describe FrameRepository do
       expect(Frame.count).to eq(0)
       expect(result.created_at).to eq(nil)
       expect(result.game_id).to eq(game.id)
-      expect(result.state).to eq('open')
       expect(result.rolls).to eq([])
       expect(result.updated_at).to eq(nil)
     end
@@ -47,19 +37,8 @@ RSpec.describe FrameRepository do
       expect(Frame.count).to eq(1)
       expect(result.created_at).to_not eq(nil)
       expect(result.game_id).to eq(game.id)
-      expect(result.state).to eq('open')
       expect(result.rolls).to eq([])
       expect(result.updated_at).to_not eq(nil)
-    end
-  end
-
-  describe '#update' do
-    it 'updates an existing frame' do
-      frame = FactoryBot.create(:frame, state: 'open')
-
-      described_class.new.update(frame, state: 'strike')
-
-      expect(frame.state).to eq('strike')
     end
   end
 end

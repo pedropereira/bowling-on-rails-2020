@@ -4,6 +4,4 @@ class FrameSerializer
   include FastJsonapi::ObjectSerializer
 
   has_many :rolls
-
-  attributes :state
 end

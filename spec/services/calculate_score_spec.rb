@@ -26,88 +26,54 @@ RSpec.describe CalculateScore do
   def perfect_game
     game = FactoryBot.create(:game)
     frames = 10.times.map do
-      FactoryBot.create(:frame, game_id: game.id, state: 'strike')
+      FactoryBot.create(:frame, game_id: game.id)
     end
-    FactoryBot.create(:roll, frame_id: frames[0].id, pins: 10)
-    FactoryBot.create(:roll, frame_id: frames[1].id, pins: 10)
-    FactoryBot.create(:roll, frame_id: frames[2].id, pins: 10)
-    FactoryBot.create(:roll, frame_id: frames[3].id, pins: 10)
-    FactoryBot.create(:roll, frame_id: frames[4].id, pins: 10)
-    FactoryBot.create(:roll, frame_id: frames[5].id, pins: 10)
-    FactoryBot.create(:roll, frame_id: frames[6].id, pins: 10)
-    FactoryBot.create(:roll, frame_id: frames[7].id, pins: 10)
-    FactoryBot.create(:roll, frame_id: frames[8].id, pins: 10)
-    FactoryBot.create(:roll, frame_id: frames[9].id, pins: 10)
-    FactoryBot.create(:roll, frame_id: frames[9].id, pins: 10)
-    FactoryBot.create(:roll, frame_id: frames[9].id, pins: 10)
+    frame_scores = [
+      [10], [10], [10], [10], [10], [10], [10], [10], [10], [10, 10, 10]
+    ]
 
-    game
+    frame_scores.each_with_index do |frame, index|
+      frame.each do |pins|
+        FactoryBot.create(:roll, frame_id: frames[index].id, pins: pins)
+      end
+    end
+
+    GameDecorator.new(game)
   end
 
   def spares_with_bonus_roll_game
     game = FactoryBot.create(:game)
     frames = 10.times.map do
-      FactoryBot.create(:frame, game_id: game.id, state: 'spare')
+      FactoryBot.create(:frame, game_id: game.id)
     end
-    FactoryBot.create(:roll, frame_id: frames[0].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[0].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[1].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[1].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[2].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[2].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[3].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[3].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[4].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[4].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[5].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[5].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[6].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[6].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[7].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[7].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[8].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[8].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[9].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[9].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[9].id, pins: 5)
+    frame_scores = [
+      [5, 5], [5, 5], [5, 5], [5, 5], [5, 5], [5, 5], [5, 5], [5, 5], [5, 5], [5, 5, 5]
+    ]
 
-    game
+    frame_scores.each_with_index do |frame, index|
+      frame.each do |pins|
+        FactoryBot.create(:roll, frame_id: frames[index].id, pins: pins)
+      end
+    end
+
+    GameDecorator.new(game)
   end
 
   def uncle_bob_game
     game = FactoryBot.create(:game)
-    frames = [
-      FactoryBot.create(:frame, game_id: game.id, state: 'open'),
-      FactoryBot.create(:frame, game_id: game.id, state: 'open'),
-      FactoryBot.create(:frame, game_id: game.id, state: 'spare'),
-      FactoryBot.create(:frame, game_id: game.id, state: 'spare'),
-      FactoryBot.create(:frame, game_id: game.id, state: 'strike'),
-      FactoryBot.create(:frame, game_id: game.id, state: 'open'),
-      FactoryBot.create(:frame, game_id: game.id, state: 'spare'),
-      FactoryBot.create(:frame, game_id: game.id, state: 'spare'),
-      FactoryBot.create(:frame, game_id: game.id, state: 'strike'),
-      FactoryBot.create(:frame, game_id: game.id, state: 'spare')
+    frames = 10.times.map do
+      FactoryBot.create(:frame, game_id: game.id)
+    end
+    frame_scores = [
+      [1, 4], [4, 5], [6, 4], [5, 5], [10], [0, 1], [7, 3], [6, 4], [10], [2, 8, 6]
     ]
-    FactoryBot.create(:roll, frame_id: frames[0].id, pins: 1)
-    FactoryBot.create(:roll, frame_id: frames[0].id, pins: 4)
-    FactoryBot.create(:roll, frame_id: frames[1].id, pins: 4)
-    FactoryBot.create(:roll, frame_id: frames[1].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[2].id, pins: 6)
-    FactoryBot.create(:roll, frame_id: frames[2].id, pins: 4)
-    FactoryBot.create(:roll, frame_id: frames[3].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[3].id, pins: 5)
-    FactoryBot.create(:roll, frame_id: frames[4].id, pins: 10)
-    FactoryBot.create(:roll, frame_id: frames[5].id, pins: 0)
-    FactoryBot.create(:roll, frame_id: frames[5].id, pins: 1)
-    FactoryBot.create(:roll, frame_id: frames[6].id, pins: 7)
-    FactoryBot.create(:roll, frame_id: frames[6].id, pins: 3)
-    FactoryBot.create(:roll, frame_id: frames[7].id, pins: 6)
-    FactoryBot.create(:roll, frame_id: frames[7].id, pins: 4)
-    FactoryBot.create(:roll, frame_id: frames[8].id, pins: 10)
-    FactoryBot.create(:roll, frame_id: frames[9].id, pins: 2)
-    FactoryBot.create(:roll, frame_id: frames[9].id, pins: 8)
-    FactoryBot.create(:roll, frame_id: frames[9].id, pins: 6)
 
-    game
+    frame_scores.each_with_index do |frame, index|
+      frame.each do |pins|
+        FactoryBot.create(:roll, frame_id: frames[index].id, pins: pins)
+      end
+    end
+
+    GameDecorator.new(game)
   end
 end
