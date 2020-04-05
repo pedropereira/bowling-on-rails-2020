@@ -3,7 +3,7 @@
 class GameRollController < ApplicationController
   def call
     form = Forms::Roll.new(permitted_params)
-    result = form.call()
+    result = form.call
 
     if result
       render json: serialize(result), status: 200, content_type: 'application/vnd.api+json'

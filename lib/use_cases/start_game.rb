@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class StartGame
+class UseCases::StartGame
   def call
     game = game_repository.create
     frame_repository.create(game_id: game.id)
