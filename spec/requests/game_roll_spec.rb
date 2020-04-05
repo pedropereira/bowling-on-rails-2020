@@ -44,7 +44,7 @@ RSpec.describe 'GameRoll', type: :request do
 
       expect(response.status).to eq(422)
       expect(body).to eq(
-        'detail' => "Pins can't be blank, Pins is not a number",
+        'detail' => 'pins is missing',
         'status' => '422',
         'title' => 'Unprocessable Entity'
       )
@@ -58,7 +58,7 @@ RSpec.describe 'GameRoll', type: :request do
 
       expect(response.status).to eq(422)
       expect(body).to eq(
-        'detail' => 'Game already finished',
+        'detail' => 'game is already finished',
         'status' => '422',
         'title' => 'Unprocessable Entity'
       )
