@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe GameDecorator do
+RSpec.describe Entities::Game do
   describe '#roll' do
     it 'produces a perfect game (only strikes) with two bonus rolls in the final frame' do
       game = create_game

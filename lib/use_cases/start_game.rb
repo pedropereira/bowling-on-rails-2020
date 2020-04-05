@@ -1,20 +1,22 @@
 # frozen_string_literal: true
 
-class UseCases::StartGame
-  def call
-    game = game_repository.create
-    frame_repository.create(game_id: game.id)
+module UseCases
+  class StartGame
+    def call
+      game = game_repository.create
+      frame_repository.create(game_id: game.id)
 
-    game
-  end
+      game
+    end
 
-  private
+    private
 
-  def frame_repository
-    @frame_repository ||= FrameRepository.new
-  end
+    def frame_repository
+      @frame_repository ||= FrameRepository.new
+    end
 
-  def game_repository
-    @game_repository ||= GameRepository.new
+    def game_repository
+      @game_repository ||= GameRepository.new
+    end
   end
 end

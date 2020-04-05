@@ -38,7 +38,7 @@ RSpec.describe UseCases::CalculateScore do
       end
     end
 
-    GameDecorator.new(game)
+    Entities::Game.new(game)
   end
 
   def spares_with_bonus_roll_game
@@ -56,7 +56,7 @@ RSpec.describe UseCases::CalculateScore do
       end
     end
 
-    GameDecorator.new(game)
+    Entities::Game.new(game)
   end
 
   def uncle_bob_game
@@ -74,6 +74,6 @@ RSpec.describe UseCases::CalculateScore do
       end
     end
 
-    GameDecorator.new(game)
+    Entities::Game.new(game)
   end
 end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Frame::RegularDecorator do
+RSpec.describe Entities::Frame::Regular do
   describe '#roll' do
     it 'produces a strike' do
       frame = FactoryBot.create(:frame)
