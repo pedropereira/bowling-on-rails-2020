@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CalculateScore
+class UseCases::CalculateScore
   def call(frames)
     frames.each_with_index.reduce(0) do |sum, (frame, index)|
       frame_score(frames, sum, frame, index)

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe CalculateScore do
+RSpec.describe UseCases::CalculateScore do
   describe '#call' do
     it 'calculates the total score for a perfect game (only strikes)' do
       result = described_class.new.call(perfect_game.frames)
