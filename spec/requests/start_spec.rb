@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe 'GameStart', type: :request do
+RSpec.describe 'Start', type: :request do
   describe 'request' do
     it 'creates a new game' do
-      post '/games/start'
+      post '/api/v1/games/start'
 
       body = JSON.parse(response.body)
 

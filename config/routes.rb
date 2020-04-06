@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  post '/games/start', to: 'game_start#call'
+  namespace :api do
+    namespace :v1 do
+      post '/games/start', to: 'start#call'
 
-  post '/games/:id/roll', to: 'game_roll#call'
+      post '/games/:id/roll', to: 'roll#call'
+    end
+  end
 end

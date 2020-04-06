@@ -2,11 +2,11 @@
 
 require 'rails_helper'
 
-RSpec.describe 'GameRoll', type: :request do
+RSpec.describe 'Roll', type: :request do
   describe 'request' do
     it 'creates a new roll' do
       game = FactoryBot.create(:game, frames: [FactoryBot.create(:frame)])
-      post "/games/#{game.id}/roll", params: { pins: '10' }
+      post "/api/v1/games/#{game.id}/roll", params: { pins: '10' }
 
       body = JSON.parse(response.body)
 
@@ -38,7 +38,7 @@ RSpec.describe 'GameRoll', type: :request do
 
     it 'fails with 422 if pins parameter is missing' do
       game = FactoryBot.create(:game, frames: [FactoryBot.create(:frame)])
-      post "/games/#{game.id}/roll", params: {}
+      post "/api/v1/games/#{game.id}/roll", params: {}
 
       body = JSON.parse(response.body)
 
@@ -52,7 +52,7 @@ RSpec.describe 'GameRoll', type: :request do
 
     it 'fails with 422 if game is already finished' do
       game = FactoryBot.create(:game, state: 'finished')
-      post "/games/#{game.id}/roll", params: { pins: '10' }
+      post "/api/v1/games/#{game.id}/roll", params: { pins: '10' }
 
       body = JSON.parse(response.body)
 
@@ -65,7 +65,7 @@ RSpec.describe 'GameRoll', type: :request do
     end
 
     it 'fails with 404 if game does not exist' do
-      post '/games/1024/roll', params: { pins: '10' }
+      post '/api/v1/games/1024/roll', params: { pins: '10' }
 
       body = JSON.parse(response.body)
 
