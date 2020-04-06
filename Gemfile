@@ -7,7 +7,6 @@ ruby '2.6.5'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'dry-validation'
-gem 'fast_jsonapi'
 gem 'puma', '~> 4.1'
 gem 'rails', '~> 6.0.1'
 gem 'rubocop', require: false
