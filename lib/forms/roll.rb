@@ -28,9 +28,9 @@ module Forms
     private
 
     def create_roll(id:, pins:)
-      game = game_repository.find(id)
-      game_decorator = Entities::Game.new(game)
-      result = game_decorator.roll(pins.to_i)
+      model = game_repository.find(id)
+      game = Entities::Game.new(model)
+      result = game.roll(pins.to_i)
 
       if result
         game
