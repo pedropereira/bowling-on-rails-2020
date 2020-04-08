@@ -15,7 +15,7 @@ RSpec.describe Services::CalculateScore do
     it 'calculates the total score for a game full of spares and a bonus roll' do
       calculate_score = described_class.new
 
-      result = calculate_score.call(spares_with_bonus_roll_game)
+      result = calculate_score.for_game(spares_with_bonus_roll_game)
 
       expect(result).to eq(150)
     end
@@ -23,7 +23,7 @@ RSpec.describe Services::CalculateScore do
     it "calculates the total score for uncle bob's game" do
       calculate_score = described_class.new
 
-      result = calculate_score.call(uncle_bob_game)
+      result = calculate_score.for_game(uncle_bob_game)
 
       expect(result).to eq(133)
     end
