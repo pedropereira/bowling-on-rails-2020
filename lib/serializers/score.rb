@@ -14,6 +14,7 @@ module Serializers
 
     private
 
+    # rubocop:disable Metrics/MethodLength
     def game_payload(game)
       {
         "data": {
@@ -31,7 +32,9 @@ module Serializers
         }
       }
     end
+    # rubocop:enable Metrics/MethodLength
 
+    # rubocop:disable Metrics/MethodLength
     def frames_payload(frames)
       frames.map do |frame|
         {
@@ -48,6 +51,7 @@ module Serializers
         }
       end
     end
+    # rubocop:enable Metrics/MethodLength
 
     def rolls_payload(rolls)
       rolls.map do |roll|
