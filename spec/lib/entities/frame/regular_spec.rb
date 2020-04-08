@@ -6,7 +6,7 @@ RSpec.describe Entities::Frame::Regular do
   describe '#roll' do
     it 'produces a strike' do
       frame = FactoryBot.create(:frame)
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       decorator.roll(10)
 
@@ -16,7 +16,7 @@ RSpec.describe Entities::Frame::Regular do
 
     it 'produces a spare' do
       frame = FactoryBot.create(:frame)
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       decorator.roll(2)
       decorator.roll(8)
@@ -27,7 +27,7 @@ RSpec.describe Entities::Frame::Regular do
 
     it 'produces one roll' do
       frame = FactoryBot.create(:frame)
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       decorator.roll(9)
 
@@ -37,7 +37,7 @@ RSpec.describe Entities::Frame::Regular do
 
     it 'produces two rolls' do
       frame = FactoryBot.create(:frame)
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       decorator.roll(7)
       decorator.roll(2)
@@ -50,7 +50,7 @@ RSpec.describe Entities::Frame::Regular do
   describe '#open?' do
     it 'returns true for no rolls' do
       frame = FactoryBot.create(:frame)
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       result = decorator.open?
 
@@ -61,7 +61,7 @@ RSpec.describe Entities::Frame::Regular do
       frame = FactoryBot.create(
         :frame, rolls: [FactoryBot.create(:roll, pins: 1)]
       )
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       result = decorator.open?
 
@@ -72,7 +72,7 @@ RSpec.describe Entities::Frame::Regular do
       frame = FactoryBot.create(
         :frame, rolls: [FactoryBot.create(:roll, pins: 1), FactoryBot.create(:roll, pins: 2)]
       )
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       result = decorator.open?
 
@@ -83,7 +83,7 @@ RSpec.describe Entities::Frame::Regular do
       frame = FactoryBot.create(
         :frame, rolls: [FactoryBot.create(:roll, pins: 10)]
       )
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       result = decorator.open?
 
@@ -94,7 +94,7 @@ RSpec.describe Entities::Frame::Regular do
       frame = FactoryBot.create(
         :frame, rolls: [FactoryBot.create(:roll, pins: 5), FactoryBot.create(:roll, pins: 5)]
       )
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       result = decorator.open?
 
@@ -107,7 +107,7 @@ RSpec.describe Entities::Frame::Regular do
       frame = FactoryBot.create(
         :frame, rolls: [FactoryBot.create(:roll, pins: 10)]
       )
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       result = decorator.strike?
 
@@ -116,7 +116,7 @@ RSpec.describe Entities::Frame::Regular do
 
     it 'returns false for no rolls' do
       frame = FactoryBot.create(:frame)
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       result = decorator.strike?
 
@@ -127,7 +127,7 @@ RSpec.describe Entities::Frame::Regular do
       frame = FactoryBot.create(
         :frame, rolls: [FactoryBot.create(:roll, pins: 1)]
       )
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       result = decorator.strike?
 
@@ -138,7 +138,7 @@ RSpec.describe Entities::Frame::Regular do
       frame = FactoryBot.create(
         :frame, rolls: [FactoryBot.create(:roll, pins: 1), FactoryBot.create(:roll, pins: 2)]
       )
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       result = decorator.strike?
 
@@ -149,7 +149,7 @@ RSpec.describe Entities::Frame::Regular do
       frame = FactoryBot.create(
         :frame, rolls: [FactoryBot.create(:roll, pins: 5), FactoryBot.create(:roll, pins: 5)]
       )
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       result = decorator.strike?
 
@@ -162,7 +162,7 @@ RSpec.describe Entities::Frame::Regular do
       frame = FactoryBot.create(
         :frame, rolls: [FactoryBot.create(:roll, pins: 5), FactoryBot.create(:roll, pins: 5)]
       )
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       result = decorator.spare?
 
@@ -171,7 +171,7 @@ RSpec.describe Entities::Frame::Regular do
 
     it 'returns false for no rolls' do
       frame = FactoryBot.create(:frame)
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       result = decorator.spare?
 
@@ -182,7 +182,7 @@ RSpec.describe Entities::Frame::Regular do
       frame = FactoryBot.create(
         :frame, rolls: [FactoryBot.create(:roll, pins: 1)]
       )
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       result = decorator.spare?
 
@@ -193,7 +193,7 @@ RSpec.describe Entities::Frame::Regular do
       frame = FactoryBot.create(
         :frame, rolls: [FactoryBot.create(:roll, pins: 1), FactoryBot.create(:roll, pins: 2)]
       )
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       result = decorator.spare?
 
@@ -204,7 +204,7 @@ RSpec.describe Entities::Frame::Regular do
       frame = FactoryBot.create(
         :frame, rolls: [FactoryBot.create(:roll, pins: 10)]
       )
-      decorator = described_class.new(frame: frame)
+      decorator = described_class.new(frame)
 
       result = decorator.spare?
 
