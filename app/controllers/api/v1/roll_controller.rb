@@ -4,11 +4,10 @@ module API
   module V1
     class RollController < ApplicationController
       def call
-        form = Forms::Roll.new(permitted_params)
-        result = form.call
+        game = Forms::Roll.new(permitted_params).call
 
-        if result
-          render json: serialize(result), status: 200, content_type: 'application/vnd.api+json'
+        if game
+          render json: serialize(game), status: 200, content_type: 'application/vnd.api+json'
         else
           render_422(form.errors)
         end
@@ -21,7 +20,7 @@ module API
       end
 
       def serialize(game)
-        GameSerializer.new(game).serialized_json
+        Serializers::Score.new(game).call
       end
     end
   end
