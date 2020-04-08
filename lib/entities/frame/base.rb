@@ -5,11 +5,11 @@ module Entities
     class Base
       attr_reader :frame, :game
 
-      delegate :id, :persisted?, to: :frame
+      delegate :id, :created_at, :persisted?, to: :frame
 
-      def initialize(params = {})
-        @frame = params.fetch(:frame)
-        @game = params.fetch(:game) { game_repository.create }
+      def initialize(frame)
+        @frame = frame
+        @game = frame.game
       end
 
       def rolls
