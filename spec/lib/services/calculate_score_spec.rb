@@ -2,22 +2,28 @@
 
 require 'rails_helper'
 
-RSpec.describe UseCases::CalculateScore do
-  describe '#call' do
+RSpec.describe Services::CalculateScore do
+  describe '#for_game' do
     it 'calculates the total score for a perfect game (only strikes)' do
-      result = described_class.new.call(perfect_game.frames)
+      calculate_score = described_class.new
+
+      result = calculate_score.for_game(perfect_game)
 
       expect(result).to eq(300)
     end
 
     it 'calculates the total score for a game full of spares and a bonus roll' do
-      result = described_class.new.call(spares_with_bonus_roll_game.frames)
+      calculate_score = described_class.new
+
+      result = calculate_score.call(spares_with_bonus_roll_game)
 
       expect(result).to eq(150)
     end
 
     it "calculates the total score for uncle bob's game" do
-      result = described_class.new.call(uncle_bob_game.frames)
+      calculate_score = described_class.new
+
+      result = calculate_score.call(uncle_bob_game)
 
       expect(result).to eq(133)
     end

@@ -1,14 +1,24 @@
 # frozen_string_literal: true
 
-module UseCases
+module Services
   class CalculateScore
-    def call(frames)
+    def for_game(game)
+      for_frames(game.frames)
+    end
+
+    def for_frame(frame)
+      frames = Queries::PreviousFrames.new(frame).call
+
+      for_frames(frames)
+    end
+
+    private
+
+    def for_frames(frames)
       frames.each_with_index.reduce(0) do |sum, (frame, index)|
         frame_score(frames, sum, frame, index)
       end
     end
-
-    private
 
     def frame_score(frames, sum, frame, index)
       if frame.strike?
