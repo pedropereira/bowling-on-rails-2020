@@ -6,7 +6,7 @@ module API
       def call
         game = UseCases::GetScore.new.call(params[:id])
 
-        render json: game, status: 200, content_type: 'application/vnd.api+json'
+        render_ok(game)
       end
     end
   end

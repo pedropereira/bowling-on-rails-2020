@@ -6,13 +6,13 @@ module API
       def call
         game = UseCases::StartGame.new.call
 
-        render json: serialize(game), status: 200, content_type: 'application/vnd.api+json'
+        render_ok(serialize(game))
       end
 
       private
 
       def serialize(game)
-        GameSerializer.new(game).serialized_json
+        Serializers::Score.new(game).call
       end
     end
   end
