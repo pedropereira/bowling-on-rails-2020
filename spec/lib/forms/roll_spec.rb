@@ -94,13 +94,13 @@ RSpec.describe Forms::Roll do
       expect(form.errors).to eq('game is already finished')
     end
 
-    it 'returns the game if roll was successful' do
+    it 'returns true if roll was successful' do
       game = FactoryBot.create(:game, state: 'ongoing', frames: [FactoryBot.create(:frame)])
       form = described_class.new(id: game.id, pins: 10)
 
       result = form.call
 
-      expect(result).to eq(game)
+      expect(result).to eq(game_id: game.id)
     end
   end
 end

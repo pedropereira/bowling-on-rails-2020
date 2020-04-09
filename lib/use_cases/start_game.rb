@@ -3,10 +3,10 @@
 module UseCases
   class StartGame
     def call
-      game = game_repository.create
-      frame_repository.create(game_id: game.id)
+      model = game_repository.create
+      frame_repository.create(game_id: model.id)
 
-      game
+      Entities::Game.new(model)
     end
 
     private

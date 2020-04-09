@@ -11,29 +11,7 @@ RSpec.describe 'Roll', type: :request do
       body = JSON.parse(response.body)
 
       expect(response).to be_successful
-      expect(body).to eq(
-        'data' => {
-          'id' => game.id.to_s,
-          'type' => 'game',
-          'attributes' => {
-            'state' => 'ongoing'
-          },
-          'relationships' => {
-            'frames' => {
-              'data' => [
-                {
-                  'id' => '1',
-                  'type' => 'frame'
-                },
-                {
-                  'id' => '2',
-                  'type' => 'frame'
-                }
-              ]
-            }
-          }
-        }
-      )
+      expect(body).to eq('game_id' => game.id)
     end
 
     it 'fails with 422 if pins parameter is missing' do

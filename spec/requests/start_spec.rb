@@ -10,25 +10,146 @@ RSpec.describe 'Start', type: :request do
       body = JSON.parse(response.body)
 
       expect(response).to be_successful
-      expect(body).to eq(
+      expect(body).to eq(payload)
+    end
+
+    def payload
+      {
         'data' => {
-          'id' => '1',
+          'id' => 1,
           'type' => 'game',
           'attributes' => {
-            'state' => 'ongoing'
+            'state' => 'ongoing',
+            'score' => 0
           },
           'relationships' => {
             'frames' => {
               'data' => [
                 {
-                  'id' => '1',
-                  'type' => 'frame'
+                  'id' => 1,
+                  'type' => 'frame',
+                  'attributes' => {
+                    'score' => 0
+                  },
+                  'relationships' => {
+                    'rolls' => {
+                      'data' => []
+                    }
+                  }
+                },
+                {
+                  'id' => nil,
+                  'type' => 'frame',
+                  'attributes' => {
+                    'score' => 0
+                  },
+                  'relationships' => {
+                    'rolls' => {
+                      'data' => []
+                    }
+                  }
+                },
+                {
+                  'id' => nil,
+                  'type' => 'frame',
+                  'attributes' => {
+                    'score' => 0
+                  },
+                  'relationships' => {
+                    'rolls' => {
+                      'data' => []
+                    }
+                  }
+                },
+                {
+                  'id' => nil,
+                  'type' => 'frame',
+                  'attributes' => {
+                    'score' => 0
+                  },
+                  'relationships' => {
+                    'rolls' => {
+                      'data' => []
+                    }
+                  }
+                },
+                {
+                  'id' => nil,
+                  'type' => 'frame',
+                  'attributes' => {
+                    'score' => 0
+                  },
+                  'relationships' => {
+                    'rolls' => {
+                      'data' => []
+                    }
+                  }
+                },
+                {
+                  'id' => nil,
+                  'type' => 'frame',
+                  'attributes' => {
+                    'score' => 0
+                  },
+                  'relationships' => {
+                    'rolls' => {
+                      'data' => []
+                    }
+                  }
+                },
+                {
+                  'id' => nil,
+                  'type' => 'frame',
+                  'attributes' => {
+                    'score' => 0
+                  },
+                  'relationships' => {
+                    'rolls' => {
+                      'data' => []
+                    }
+                  }
+                },
+                {
+                  'id' => nil,
+                  'type' => 'frame',
+                  'attributes' => {
+                    'score' => 0
+                  },
+                  'relationships' => {
+                    'rolls' => {
+                      'data' => []
+                    }
+                  }
+                },
+                {
+                  'id' => nil,
+                  'type' => 'frame',
+                  'attributes' => {
+                    'score' => 0
+                  },
+                  'relationships' => {
+                    'rolls' => {
+                      'data' => []
+                    }
+                  }
+                },
+                {
+                  'id' => nil,
+                  'type' => 'frame',
+                  'attributes' => {
+                    'score' => 0
+                  },
+                  'relationships' => {
+                    'rolls' => {
+                      'data' => []
+                    }
+                  }
                 }
               ]
             }
           }
         }
-      )
+      }
     end
   end
 end

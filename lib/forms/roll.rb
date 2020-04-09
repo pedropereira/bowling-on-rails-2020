@@ -30,10 +30,10 @@ module Forms
     def create_roll(id:, pins:)
       model = game_repository.find(id)
       game = Entities::Game.new(model)
-      result = game.roll(pins.to_i)
+      successful_roll = game.roll(pins.to_i)
 
-      if result
-        game
+      if successful_roll
+        { game_id: game.id }
       else
         @errors.add(game: 'is already finished')
         false
