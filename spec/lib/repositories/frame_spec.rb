@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe FrameRepository do
+RSpec.describe Repositories::Frame do
   describe '#all' do
     it 'returns all frames' do
       frame1 = FactoryBot.create(:frame)

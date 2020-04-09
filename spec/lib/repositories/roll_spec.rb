@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe RollRepository do
+RSpec.describe Repositories::Roll do
   describe '#all' do
     it 'returns all rolls' do
       roll1 = FactoryBot.create(:roll)

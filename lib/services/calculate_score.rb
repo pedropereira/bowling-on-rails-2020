@@ -47,7 +47,7 @@ module Services
     end
 
     def roll_repository
-      @roll_repository ||= RollRepository.new
+      @roll_repository ||= Repositories::Roll.new
     end
 
     def subsequent_rolls(frames, index)

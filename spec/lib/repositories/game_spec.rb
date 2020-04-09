@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe GameRepository do
+RSpec.describe Repositories::Game do
   describe '#create' do
     it 'creates a new game' do
       result = described_class.new.create
@@ -36,6 +36,7 @@ RSpec.describe GameRepository do
       game = FactoryBot.create(:game, state: 'ongoing')
 
       described_class.new.update(game, state: 'finished')
+      game.reload
 
       expect(game.state).to eq('finished')
     end

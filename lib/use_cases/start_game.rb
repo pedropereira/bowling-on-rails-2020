@@ -12,11 +12,11 @@ module UseCases
     private
 
     def frame_repository
-      @frame_repository ||= FrameRepository.new
+      @frame_repository ||= Repositories::Frame.new
     end
 
     def game_repository
-      @game_repository ||= GameRepository.new
+      @game_repository ||= Repositories::Game.new
     end
   end
 end

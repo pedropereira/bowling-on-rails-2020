@@ -41,7 +41,7 @@ module Forms
     end
 
     def game_repository
-      @game_repository ||= GameRepository.new
+      @game_repository ||= Repositories::Game.new
     end
   end
 end

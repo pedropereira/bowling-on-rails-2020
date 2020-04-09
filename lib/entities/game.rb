@@ -35,7 +35,7 @@ module Entities
     end
 
     def frame_repository
-      @frame_repository ||= FrameRepository.new
+      @frame_repository ||= Repositories::Frame.new
     end
 
     def regular_frames(frames)

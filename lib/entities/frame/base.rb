@@ -23,15 +23,15 @@ module Entities
       private
 
       def game_repository
-        @game_repository ||= GameRepository.new
+        @game_repository ||= Repositories::Game.new
       end
 
       def frame_repository
-        @frame_repository ||= FrameRepository.new
+        @frame_repository ||= Repositories::Frame.new
       end
 
       def roll_repository
-        @roll_repository ||= RollRepository.new
+        @roll_repository ||= Repositories::Roll.new
       end
     end
   end
