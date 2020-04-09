@@ -1,4 +1,4 @@
-bundler-audit:
+audit:
 	bundle exec bundle-audit check --update
 
 brakeman:
@@ -12,6 +12,9 @@ rubocop:
 
 server:
 	bundle exec rails s
+
+stats:
+	bundle exec rails stats
 
 tests:
 	bundle exec rspec
