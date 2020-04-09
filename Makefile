@@ -11,7 +11,7 @@ rubocop:
 	bundle exec rubocop -a
 
 server:
-	bundle exec rails s -p 5000
+	bundle exec rails s
 
 tests:
 	bundle exec rspec
