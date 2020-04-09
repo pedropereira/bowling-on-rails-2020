@@ -1,3 +1,6 @@
+bundler-audit:
+	bundle exec bundle-audit check --update
+
 brakeman:
 	bundle exec brakeman --run-all-checks
 
