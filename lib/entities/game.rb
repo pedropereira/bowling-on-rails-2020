@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
 module Entities
-  class Game
-    attr_reader :game
+  class Game < Base
+    delegate :created_at,
+             :state,
+             :updated_at,
+             to: :model
 
-    delegate :id, :state, to: :game
-
-    def initialize(game)
-      @game = game
-    end
+    FINISHED = 'finished'
+    ONGOING = 'ongoing'
 
     def frames
-      frames = frame_repository.all(game_id: game.id).order(:created_at)
+      frames = frame_repository.all(filters: { game_id: id }, order: { created_at: :asc })
 
       regular_frames(frames) + [tenth_frame(frames)]
     end
 
     def roll(pins)
-      return false if game.state == ::Game::FINISHED
+      return false if state == FINISHED
 
       current_frame.roll(pins)
 
@@ -26,8 +26,8 @@ module Entities
 
     private
 
-    def build_frame
-      frame_repository.build(game_id: game.id)
+    def build_frame(kind:)
+      frame_repository.build(game_id: id, kind: kind)
     end
 
     def current_frame
@@ -40,12 +40,12 @@ module Entities
 
     def regular_frames(frames)
       9.times.map do |i|
-        Entities::Frame::Regular.new(frames[i] || build_frame)
+        Entities::Frame::Regular.new(frames[i] || build_frame(kind: Entities::Frame::REGULAR))
       end
     end
 
     def tenth_frame(frames)
-      Entities::Frame::Tenth.new(frames[9] || build_frame)
+      Entities::Frame::Tenth.new(frames[9] || build_frame(kind: Entities::Frame::TENTH))
     end
   end
 end

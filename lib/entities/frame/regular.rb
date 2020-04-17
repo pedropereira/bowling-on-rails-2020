@@ -4,17 +4,9 @@ module Entities
   module Frame
     class Regular < Entities::Frame::Base
       def roll(pins)
-        roll_repository.create(frame_id: frame.id, pins: pins)
+        roll_repository.create(frame_id: id, pins: pins)
 
         start_new_frame if finished?
-      end
-
-      def rolls
-        frame.rolls.order(:created_at)
-      end
-
-      def rolls_done?(number)
-        rolls.size == number
       end
 
       def open?
@@ -35,8 +27,9 @@ module Entities
         (open? && rolls_done?(2)) || strike? || spare?
       end
 
+      # TODO: FIX THIS
       def start_new_frame
-        frame_repository.create(game_id: game.id)
+        frame_repository.create(game_id: game.id, kind: Entities::Frame::REGULAR)
       end
     end
   end

@@ -4,7 +4,7 @@ module Entities
   module Frame
     class Tenth < Entities::Frame::Base
       def roll(pins)
-        roll_repository.create(frame_id: frame.id, pins: pins)
+        roll_repository.create(frame_id: id, pins: pins)
 
         finish_game if finished?
       end
@@ -18,7 +18,7 @@ module Entities
       end
 
       def strike?
-        rolls.count >= 2 && rolls.first.pins == 10
+        rolls.count >= 1 && rolls.first.pins == 10
       end
 
       private
@@ -28,7 +28,7 @@ module Entities
       end
 
       def finish_game
-        game_repository.update(game, state: ::Game::FINISHED)
+        game_repository.update(game, state: Entities::Game::FINISHED)
       end
     end
   end

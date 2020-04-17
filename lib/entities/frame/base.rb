@@ -2,18 +2,26 @@
 
 module Entities
   module Frame
-    class Base
-      attr_reader :frame, :game
+    REGULAR = 'regular'
+    TENTH = 'tenth'
 
-      delegate :id, :created_at, :persisted?, to: :frame
+    class Base < Entities::Base
+      attr_reader :game
 
-      def initialize(frame)
-        @frame = frame
-        @game = frame.game
+      delegate :created_at,
+               :game_id,
+               :kind,
+               :persisted?,
+               :updated_at,
+               to: :model
+
+      def initialize(model)
+        super(model)
+        @game = model.game
       end
 
       def rolls
-        frame.rolls.order(:created_at)
+        roll_repository.all(filters: { frame_id: id }, order: { created_at: :asc })
       end
 
       def rolls_done?(number)
