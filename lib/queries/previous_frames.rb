@@ -11,9 +11,13 @@ module Queries
     end
 
     def call
-      game.frames.where('created_at <= ?', frame.created_at).map do |frame|
-        Entities::Frame::Regular.new(frame)
-      end
+      frame_repository.all(filters: "game_id = #{game.id} and created_at < '#{frame.created_at}'")
+    end
+
+    private
+
+    def frame_repository
+      @frame_repository ||= Repositories::Frame.new
     end
   end
 end
