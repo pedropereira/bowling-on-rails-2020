@@ -3,8 +3,7 @@
 module UseCases
   class GetScore
     def call(id)
-      model = game_repository.find(id)
-      game = Entities::Game.new(model)
+      game = game_repository.find(id)
 
       Serializers::Score.new(game).call
     end

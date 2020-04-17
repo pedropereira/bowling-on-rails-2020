@@ -53,7 +53,7 @@ module Services
     def subsequent_rolls(frames, index)
       frame_ids = frames.map(&:id)[(index + 1)..]
 
-      roll_repository.all(frame_id: frame_ids).order(:created_at)
+      roll_repository.all(filters: { frame_id: frame_ids }, order: { created_at: :asc })
     end
   end
 end

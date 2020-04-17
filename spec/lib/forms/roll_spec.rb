@@ -21,7 +21,7 @@ RSpec.describe Forms::Roll do
     end
 
     it 'returns false if game is already finished' do
-      game = FactoryBot.create(:game, state: 'finished')
+      game = FactoryBot.create(:game, state: Entities::Game::FINISHED)
       form = described_class.new(id: game.id)
 
       result = form.call
@@ -86,7 +86,7 @@ RSpec.describe Forms::Roll do
     end
 
     it 'set error if game is already finished' do
-      game = FactoryBot.create(:game, state: 'finished')
+      game = FactoryBot.create(:game, state: Entities::Game::FINISHED)
       form = described_class.new(id: game.id, pins: 10)
 
       form.call
@@ -95,7 +95,9 @@ RSpec.describe Forms::Roll do
     end
 
     it 'returns true if roll was successful' do
-      game = FactoryBot.create(:game, state: 'ongoing', frames: [FactoryBot.create(:frame)])
+      game = FactoryBot.create(
+        :game, state: Entities::Game::ONGOING, frames: [FactoryBot.create(:frame)]
+      )
       form = described_class.new(id: game.id, pins: 10)
 
       result = form.call
