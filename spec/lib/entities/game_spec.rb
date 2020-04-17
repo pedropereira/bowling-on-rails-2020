@@ -5,74 +5,74 @@ require 'rails_helper'
 RSpec.describe Entities::Game do
   describe '#roll' do
     it 'produces a perfect game (only strikes) with two bonus rolls in the final frame' do
-      game = create_game
-      decorator = described_class.new(game)
+      model = create_game
+      entity = described_class.new(model)
 
-      results = 12.times.map { decorator.roll(10) }
-      game.reload
+      results = 12.times.map { entity.roll(10) }
+      model.reload
 
-      expect(game.state).to eq('finished')
+      expect(entity.state).to eq('finished')
       expect(results.uniq).to eq([true])
     end
 
     it 'produces a game with a bonus roll after a spare in the final frame' do
-      game = create_game
-      decorator = described_class.new(game)
+      model = create_game
+      entity = described_class.new(model)
 
-      results = 21.times.map { decorator.roll(5) }
-      game.reload
+      results = 21.times.map { entity.roll(5) }
+      model.reload
 
-      expect(game.state).to eq('finished')
+      expect(entity.state).to eq('finished')
       expect(results.uniq).to eq([true])
     end
 
     it 'produces a game with no strikes nor spares' do
-      game = create_game
-      decorator = described_class.new(game)
+      model = create_game
+      entity = described_class.new(model)
 
-      results = 20.times.map { decorator.roll(3) }
-      game.reload
+      results = 20.times.map { entity.roll(3) }
+      model.reload
 
-      expect(game.state).to eq('finished')
+      expect(entity.state).to eq('finished')
       expect(results.uniq).to eq([true])
     end
 
     it "produces uncle bob's game" do
-      game = create_game
-      decorator = described_class.new(game)
+      model = create_game
+      entity = described_class.new(model)
 
       results = [
-        decorator.roll(1),
-        decorator.roll(4),
-        decorator.roll(4),
-        decorator.roll(5),
-        decorator.roll(6),
-        decorator.roll(4),
-        decorator.roll(5),
-        decorator.roll(5),
-        decorator.roll(10),
-        decorator.roll(0),
-        decorator.roll(1),
-        decorator.roll(7),
-        decorator.roll(3),
-        decorator.roll(6),
-        decorator.roll(4),
-        decorator.roll(10),
-        decorator.roll(2),
-        decorator.roll(8),
-        decorator.roll(6)
+        entity.roll(1),
+        entity.roll(4),
+        entity.roll(4),
+        entity.roll(5),
+        entity.roll(6),
+        entity.roll(4),
+        entity.roll(5),
+        entity.roll(5),
+        entity.roll(10),
+        entity.roll(0),
+        entity.roll(1),
+        entity.roll(7),
+        entity.roll(3),
+        entity.roll(6),
+        entity.roll(4),
+        entity.roll(10),
+        entity.roll(2),
+        entity.roll(8),
+        entity.roll(6)
       ]
-      game.reload
+      model.reload
 
-      expect(game.state).to eq('finished')
+      expect(entity.state).to eq('finished')
       expect(results.uniq).to eq([true])
     end
   end
 
   def create_game
-    game = FactoryBot.create(:game)
-    FactoryBot.create(:frame, game_id: game.id)
+    game_model = FactoryBot.create(:game)
+    FactoryBot.create(:frame, game_id: game_model.id)
 
-    game
+    game_model
   end
 end

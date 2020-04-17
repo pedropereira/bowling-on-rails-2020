@@ -5,98 +5,94 @@ require 'rails_helper'
 RSpec.describe Entities::Frame::Regular do
   describe '#roll' do
     it 'produces a strike' do
-      frame = FactoryBot.create(:frame)
-      decorator = described_class.new(frame)
+      model = FactoryBot.create(:frame)
+      entity = described_class.new(model)
 
-      decorator.roll(10)
+      entity.roll(10)
 
-      expect(decorator.strike?).to eq(true)
-      expect(decorator.rolls.count).to eq(1)
+      expect(entity.strike?).to eq(true)
+      expect(entity.rolls.count).to eq(1)
     end
 
     it 'produces a spare' do
-      frame = FactoryBot.create(:frame)
-      decorator = described_class.new(frame)
+      model = FactoryBot.create(:frame)
+      entity = described_class.new(model)
 
-      decorator.roll(2)
-      decorator.roll(8)
+      entity.roll(2)
+      entity.roll(8)
 
-      expect(decorator.spare?).to eq(true)
-      expect(decorator.rolls.count).to eq(2)
+      expect(entity.spare?).to eq(true)
+      expect(entity.rolls.count).to eq(2)
     end
 
     it 'produces one roll' do
-      frame = FactoryBot.create(:frame)
-      decorator = described_class.new(frame)
+      model = FactoryBot.create(:frame)
+      entity = described_class.new(model)
 
-      decorator.roll(9)
+      entity.roll(9)
 
-      expect(decorator.open?).to eq(true)
-      expect(decorator.rolls.count).to eq(1)
+      expect(entity.open?).to eq(true)
+      expect(entity.rolls.count).to eq(1)
     end
 
     it 'produces two rolls' do
-      frame = FactoryBot.create(:frame)
-      decorator = described_class.new(frame)
+      model = FactoryBot.create(:frame)
+      entity = described_class.new(model)
 
-      decorator.roll(7)
-      decorator.roll(2)
+      entity.roll(7)
+      entity.roll(2)
 
-      expect(decorator.open?).to eq(true)
-      expect(decorator.rolls.count).to eq(2)
+      expect(entity.open?).to eq(true)
+      expect(entity.rolls.count).to eq(2)
     end
   end
 
   describe '#open?' do
     it 'returns true for no rolls' do
-      frame = FactoryBot.create(:frame)
-      decorator = described_class.new(frame)
+      model = FactoryBot.create(:frame)
+      entity = described_class.new(model)
 
-      result = decorator.open?
+      result = entity.open?
 
       expect(result).to eq(true)
     end
 
     it 'returns true for one roll' do
-      frame = FactoryBot.create(
-        :frame, rolls: [FactoryBot.create(:roll, pins: 1)]
-      )
-      decorator = described_class.new(frame)
+      model = FactoryBot.create(:frame, rolls: [FactoryBot.create(:roll, pins: 1)])
+      entity = described_class.new(model)
 
-      result = decorator.open?
+      result = entity.open?
 
       expect(result).to eq(true)
     end
 
     it 'returns true for two rolls' do
-      frame = FactoryBot.create(
+      model = FactoryBot.create(
         :frame, rolls: [FactoryBot.create(:roll, pins: 1), FactoryBot.create(:roll, pins: 2)]
       )
-      decorator = described_class.new(frame)
+      entity = described_class.new(model)
 
-      result = decorator.open?
+      result = entity.open?
 
       expect(result).to eq(true)
     end
 
     it 'returns false for a strike' do
-      frame = FactoryBot.create(
-        :frame, rolls: [FactoryBot.create(:roll, pins: 10)]
-      )
-      decorator = described_class.new(frame)
+      model = FactoryBot.create(:frame, rolls: [FactoryBot.create(:roll, pins: 10)])
+      entity = described_class.new(model)
 
-      result = decorator.open?
+      result = entity.open?
 
       expect(result).to eq(false)
     end
 
     it 'returns false for a spare' do
-      frame = FactoryBot.create(
+      model = FactoryBot.create(
         :frame, rolls: [FactoryBot.create(:roll, pins: 5), FactoryBot.create(:roll, pins: 5)]
       )
-      decorator = described_class.new(frame)
+      entity = described_class.new(model)
 
-      result = decorator.open?
+      result = entity.open?
 
       expect(result).to eq(false)
     end
@@ -104,54 +100,50 @@ RSpec.describe Entities::Frame::Regular do
 
   describe '#strike?' do
     it 'returns true' do
-      frame = FactoryBot.create(
-        :frame, rolls: [FactoryBot.create(:roll, pins: 10)]
-      )
-      decorator = described_class.new(frame)
+      model = FactoryBot.create(:frame, rolls: [FactoryBot.create(:roll, pins: 10)])
+      entity = described_class.new(model)
 
-      result = decorator.strike?
+      result = entity.strike?
 
       expect(result).to eq(true)
     end
 
     it 'returns false for no rolls' do
-      frame = FactoryBot.create(:frame)
-      decorator = described_class.new(frame)
+      model = FactoryBot.create(:frame)
+      entity = described_class.new(model)
 
-      result = decorator.strike?
+      result = entity.strike?
 
       expect(result).to eq(false)
     end
 
     it 'returns false for one roll' do
-      frame = FactoryBot.create(
-        :frame, rolls: [FactoryBot.create(:roll, pins: 1)]
-      )
-      decorator = described_class.new(frame)
+      model = FactoryBot.create(:frame, rolls: [FactoryBot.create(:roll, pins: 1)])
+      entity = described_class.new(model)
 
-      result = decorator.strike?
+      result = entity.strike?
 
       expect(result).to eq(false)
     end
 
     it 'returns false for two rolls' do
-      frame = FactoryBot.create(
+      model = FactoryBot.create(
         :frame, rolls: [FactoryBot.create(:roll, pins: 1), FactoryBot.create(:roll, pins: 2)]
       )
-      decorator = described_class.new(frame)
+      entity = described_class.new(model)
 
-      result = decorator.strike?
+      result = entity.strike?
 
       expect(result).to eq(false)
     end
 
     it 'returns false for a spare' do
-      frame = FactoryBot.create(
+      model = FactoryBot.create(
         :frame, rolls: [FactoryBot.create(:roll, pins: 5), FactoryBot.create(:roll, pins: 5)]
       )
-      decorator = described_class.new(frame)
+      entity = described_class.new(model)
 
-      result = decorator.strike?
+      result = entity.strike?
 
       expect(result).to eq(false)
     end
@@ -159,54 +151,50 @@ RSpec.describe Entities::Frame::Regular do
 
   describe '#spare?' do
     it 'returns true' do
-      frame = FactoryBot.create(
+      model = FactoryBot.create(
         :frame, rolls: [FactoryBot.create(:roll, pins: 5), FactoryBot.create(:roll, pins: 5)]
       )
-      decorator = described_class.new(frame)
+      entity = described_class.new(model)
 
-      result = decorator.spare?
+      result = entity.spare?
 
       expect(result).to eq(true)
     end
 
     it 'returns false for no rolls' do
-      frame = FactoryBot.create(:frame)
-      decorator = described_class.new(frame)
+      model = FactoryBot.create(:frame)
+      entity = described_class.new(model)
 
-      result = decorator.spare?
+      result = entity.spare?
 
       expect(result).to eq(false)
     end
 
     it 'returns false for one roll' do
-      frame = FactoryBot.create(
-        :frame, rolls: [FactoryBot.create(:roll, pins: 1)]
-      )
-      decorator = described_class.new(frame)
+      model = FactoryBot.create(:frame, rolls: [FactoryBot.create(:roll, pins: 1)])
+      entity = described_class.new(model)
 
-      result = decorator.spare?
+      result = entity.spare?
 
       expect(result).to eq(false)
     end
 
     it 'returns false for two rolls' do
-      frame = FactoryBot.create(
+      model = FactoryBot.create(
         :frame, rolls: [FactoryBot.create(:roll, pins: 1), FactoryBot.create(:roll, pins: 2)]
       )
-      decorator = described_class.new(frame)
+      entity = described_class.new(model)
 
-      result = decorator.spare?
+      result = entity.spare?
 
       expect(result).to eq(false)
     end
 
     it 'returns false for a strike' do
-      frame = FactoryBot.create(
-        :frame, rolls: [FactoryBot.create(:roll, pins: 10)]
-      )
-      decorator = described_class.new(frame)
+      model = FactoryBot.create(:frame, rolls: [FactoryBot.create(:roll, pins: 10)])
+      entity = described_class.new(model)
 
-      result = decorator.spare?
+      result = entity.spare?
 
       expect(result).to eq(false)
     end
