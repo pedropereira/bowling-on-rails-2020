@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 2019_12_10_142241) do
 
   create_table "frames", force: :cascade do |t|
+    t.string "kind", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "game_id"
