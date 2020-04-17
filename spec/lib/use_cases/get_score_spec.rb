@@ -5,8 +5,7 @@ require 'rails_helper'
 RSpec.describe UseCases::GetScore do
   describe '#call' do
     it 'returns game score payload' do
-      model = build_model
-      game = Entities::Game.new(model)
+      game = build_game
 
       result = described_class.new.call(game.id)
 
@@ -14,8 +13,8 @@ RSpec.describe UseCases::GetScore do
     end
   end
 
-  def build_model
-    FactoryBot.create(
+  def build_game
+    model = FactoryBot.create(
       :game,
       frames: [
         FactoryBot.create(
@@ -29,6 +28,8 @@ RSpec.describe UseCases::GetScore do
         )
       ]
     )
+
+    Entities::Game.new(model)
   end
 
   def build_payload(game)

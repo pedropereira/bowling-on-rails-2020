@@ -5,8 +5,7 @@ require 'rails_helper'
 RSpec.describe Serializers::Score do
   describe '#call' do
     it 'returns the serialized payload of a game' do
-      model = build_model
-      game = Entities::Game.new(model)
+      game = build_game
       serializer = described_class.new(game)
 
       result = serializer.call
@@ -15,8 +14,8 @@ RSpec.describe Serializers::Score do
     end
   end
 
-  def build_model
-    FactoryBot.create(
+  def build_game
+    model = FactoryBot.create(
       :game,
       frames: [
         FactoryBot.create(
@@ -30,6 +29,8 @@ RSpec.describe Serializers::Score do
         )
       ]
     )
+
+    Entities::Game.new(model)
   end
 
   def build_payload(game)
