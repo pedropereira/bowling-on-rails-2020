@@ -5,27 +5,32 @@ require 'rails_helper'
 RSpec.describe Repositories::Game do
   describe '#create' do
     it 'creates a new game' do
-      result = described_class.new.create
+      repository = described_class.new
+
+      result = repository.create
 
       expect(Game.count).to eq(1)
       expect(result.created_at).to_not eq(nil)
+      expect(result.id).to_not eq(nil)
       expect(result.state).to eq('ongoing')
-      expect(result.frames).to eq([])
       expect(result.updated_at).to_not eq(nil)
     end
   end
 
   describe '#find' do
     it 'returns existing game' do
-      game = FactoryBot.create(:game)
+      game = create_game
+      repository = described_class.new
 
-      result = described_class.new.find(game.id)
+      result = repository.find(game.id)
 
       expect(result).to eq(game)
     end
 
     it 'raises ActiveRecord::RecordNotFound exception when game does not exist' do
-      execution = -> { described_class.new.find('does_not_exist') }
+      repository = described_class.new
+
+      execution = -> { repository.find('does_not_exist') }
 
       expect(execution).to raise_error(ActiveRecord::RecordNotFound)
     end
@@ -33,12 +38,18 @@ RSpec.describe Repositories::Game do
 
   describe '#update' do
     it 'updates an existing game' do
-      game = FactoryBot.create(:game, state: 'ongoing')
+      game = create_game(state: Entities::Game::ONGOING)
+      repository = described_class.new
 
-      described_class.new.update(game, state: 'finished')
-      game.reload
+      result = repository.update(game, state: Entities::Game::FINISHED)
 
-      expect(game.state).to eq('finished')
+      expect(result.state).to eq('finished')
     end
+  end
+
+  def create_game(params = {})
+    model = FactoryBot.create(:game, params)
+
+    Entities::Game.new(model)
   end
 end

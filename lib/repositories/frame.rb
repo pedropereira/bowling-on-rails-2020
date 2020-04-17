@@ -3,21 +3,32 @@
 module Repositories
   class Frame
     attr_reader :db
+    attr_reader :constructor
 
-    def initialize(params = {})
-      @db = params.fetch(:db) { ::Frame }
+    def initialize(db: ::Frame, constructor: Constructors::Frame)
+      @db = db
+      @constructor = constructor
     end
 
-    def all(filters = {})
-      db.where(filters)
+    def all(filters: {}, order: {})
+      models = db.where(filters)
+      models = models.order(order) if order.present?
+
+      models.map do |model|
+        constructor.new(model).call
+      end
     end
 
     def build(attributes = {})
-      db.new(attributes)
+      model = db.new(attributes)
+
+      constructor.new(model).call
     end
 
     def create(attributes = {})
-      db.create!(attributes)
+      model = db.create!(attributes)
+
+      constructor.new(model).call
     end
   end
 end

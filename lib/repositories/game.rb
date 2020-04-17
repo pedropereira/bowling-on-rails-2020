@@ -3,21 +3,29 @@
 module Repositories
   class Game
     attr_reader :db
+    attr_reader :entity
 
-    def initialize(params = {})
-      @db = params.fetch(:db) { ::Game }
+    def initialize(db: ::Game, entity: Entities::Game)
+      @db = db
+      @entity = entity
     end
 
     def create(attributes = {})
-      db.create!(attributes)
+      model = db.create!(attributes)
+
+      entity.new(model)
     end
 
     def find(id)
-      db.find(id)
+      model = db.find(id)
+
+      entity.new(model)
     end
 
     def update(game, attributes)
-      db.update(game.id, attributes)
+      model = db.update(game.id, attributes)
+
+      entity.new(model)
     end
   end
 end
