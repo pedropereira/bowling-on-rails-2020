@@ -2,7 +2,7 @@
 
 module Entities
   module Frame
-    class Tenth < Entities::Frame::Base
+    class Tenth < Base
       def roll(pins)
         roll_repository.create(frame_id: id, pins: pins)
 
