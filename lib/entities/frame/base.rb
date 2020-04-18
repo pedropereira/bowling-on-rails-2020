@@ -2,9 +2,6 @@
 
 module Entities
   module Frame
-    REGULAR = 'regular'
-    TENTH = 'tenth'
-
     class Base < Entities::Base
       attr_reader :game
 
