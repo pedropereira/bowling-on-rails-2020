@@ -12,7 +12,7 @@ module API
       private
 
       def serialize(game)
-        Serializers::Score.new(game).call
+        Serializers::Json::Game.new(game).to
       end
     end
   end

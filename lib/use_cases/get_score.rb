@@ -5,7 +5,7 @@ module UseCases
     def call(id)
       game = game_repository.find(id)
 
-      Serializers::Score.new(game).call
+      Serializers::Json::Game.new(game).to
     end
 
     private

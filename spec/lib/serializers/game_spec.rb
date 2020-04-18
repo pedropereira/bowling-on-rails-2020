@@ -2,13 +2,13 @@
 
 require 'rails_helper'
 
-RSpec.describe Serializers::Score do
-  describe '#call' do
+RSpec.describe Serializers::Json::Game do
+  describe '#to' do
     it 'returns the serialized payload of a game' do
       game = build_game
       serializer = described_class.new(game)
 
-      result = serializer.call
+      result = serializer.to
 
       expect(result).to eq(build_payload(game))
     end
