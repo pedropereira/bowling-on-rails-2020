@@ -8,6 +8,18 @@ AllCops:
     - '.git/**/*'
   TargetRubyVersion: 2.6
 
+Layout/LineLength:
+  Max: 100
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
 Metrics/AbcSize:
   Exclude:
     - 'spec/**/*'
@@ -16,12 +28,21 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
 
-Metrics/LineLength:
-  Max: 100
-
 Metrics/MethodLength:
   Exclude:
     - 'spec/**/*'
 
 Style/Documentation:
   Enabled: false
+
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
