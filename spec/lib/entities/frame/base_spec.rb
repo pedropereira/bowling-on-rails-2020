@@ -5,11 +5,11 @@ require 'rails_helper'
 RSpec.describe Entities::Frame::Base do
   describe '#rolls' do
     it 'returns rolls that belong the frame' do
-      frame_model = FactoryBot.create(:frame)
-      roll1 = create_roll(frame_id: frame_model.id)
-      roll2 = create_roll(frame_id: frame_model.id)
+      attributes = create_frame
+      roll1 = create_roll(frame_id: attributes[:id])
+      roll2 = create_roll(frame_id: attributes[:id])
       create_roll
-      entity = described_class.new(frame_model)
+      entity = described_class.new(attributes)
 
       result = entity.rolls
 
@@ -19,10 +19,8 @@ RSpec.describe Entities::Frame::Base do
 
   describe '#rolls_done?' do
     it 'returns true' do
-      frame_model = FactoryBot.create(:frame)
-      create_roll(frame_id: frame_model.id)
-      create_roll(frame_id: frame_model.id)
-      entity = described_class.new(frame_model)
+      attributes = create_frame(rolls: [FactoryBot.create(:roll), FactoryBot.create(:roll)])
+      entity = described_class.new(attributes)
 
       result = entity.rolls_done?(2)
 
@@ -30,9 +28,8 @@ RSpec.describe Entities::Frame::Base do
     end
 
     it 'returns false' do
-      frame_model = FactoryBot.create(:frame)
-      create_roll(frame_id: frame_model.id)
-      entity = described_class.new(frame_model)
+      attributes = create_frame(rolls: [FactoryBot.create(:roll)])
+      entity = described_class.new(attributes)
 
       result = entity.rolls_done?(2)
 
@@ -40,9 +37,16 @@ RSpec.describe Entities::Frame::Base do
     end
   end
 
+  def create_frame(params = {})
+    model = FactoryBot.create(:frame, params)
+
+    Serializers::Db::Frame.new.from(model)
+  end
+
   def create_roll(params = {})
     model = FactoryBot.create(:roll, params)
+    attributes = Serializers::Db::Roll.new.from(model)
 
-    Entities::Roll.new(model)
+    Entities::Roll.new(attributes)
   end
 end

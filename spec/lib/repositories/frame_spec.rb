@@ -51,13 +51,15 @@ RSpec.describe Repositories::Frame do
 
   def create_frame
     model = FactoryBot.create(:frame)
+    attributes = Serializers::Db::Frame.new.from(model)
 
-    Constructors::Frame.new(model).call
+    Constructors::Frame.new(attributes).call
   end
 
   def create_game
     model = FactoryBot.create(:game)
+    attributes = Serializers::Db::Game.new.from(model)
 
-    Entities::Game.new(model)
+    Entities::Game.new(attributes)
   end
 end

@@ -2,13 +2,20 @@
 
 module Entities
   class Game < Base
-    delegate :created_at,
-             :state,
-             :updated_at,
-             to: :model
-
     FINISHED = 'finished'
     ONGOING = 'ongoing'
+
+    attr_reader :created_at
+    attr_reader :state
+    attr_reader :updated_at
+
+    def initialize(created_at:, id:, state:, updated_at:)
+      @created_at = created_at
+      @state = state
+      @updated_at = updated_at
+
+      super(id: id)
+    end
 
     def frames
       frames = frame_repository.all(filters: { game_id: id }, order: { created_at: :asc })
@@ -31,7 +38,7 @@ module Entities
     end
 
     def current_frame
-      frames.select(&:persisted?).last
+      frames.select(&:id).last
     end
 
     def frame_repository
@@ -40,12 +47,12 @@ module Entities
 
     def regular_frames(frames)
       9.times.map do |i|
-        Entities::Frame::Regular.new(frames[i] || build_frame(kind: Entities::Frame::REGULAR))
+        frames[i] || build_frame(kind: Entities::Frame::REGULAR)
       end
     end
 
     def tenth_frame(frames)
-      Entities::Frame::Tenth.new(frames[9] || build_frame(kind: Entities::Frame::TENTH))
+      frames[9] || build_frame(kind: Entities::Frame::TENTH)
     end
   end
 end

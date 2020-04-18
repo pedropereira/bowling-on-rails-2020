@@ -5,41 +5,41 @@ require 'rails_helper'
 RSpec.describe Entities::Game do
   describe '#roll' do
     it 'produces a perfect game (only strikes) with two bonus rolls in the final frame' do
-      model = create_game
-      entity = described_class.new(model)
+      attributes = create_game
+      entity = described_class.new(attributes)
 
       results = 12.times.map { entity.roll(10) }
-      model.reload
+      entity = game_repository.find(entity.id)
 
       expect(entity.state).to eq('finished')
       expect(results.uniq).to eq([true])
     end
 
     it 'produces a game with a bonus roll after a spare in the final frame' do
-      model = create_game
-      entity = described_class.new(model)
+      attributes = create_game
+      entity = described_class.new(attributes)
 
       results = 21.times.map { entity.roll(5) }
-      model.reload
+      entity = game_repository.find(entity.id)
 
       expect(entity.state).to eq('finished')
       expect(results.uniq).to eq([true])
     end
 
     it 'produces a game with no strikes nor spares' do
-      model = create_game
-      entity = described_class.new(model)
+      attributes = create_game
+      entity = described_class.new(attributes)
 
       results = 20.times.map { entity.roll(3) }
-      model.reload
+      entity = game_repository.find(entity.id)
 
       expect(entity.state).to eq('finished')
       expect(results.uniq).to eq([true])
     end
 
     it "produces uncle bob's game" do
-      model = create_game
-      entity = described_class.new(model)
+      attributes = create_game
+      entity = described_class.new(attributes)
 
       results = [
         entity.roll(1),
@@ -62,7 +62,7 @@ RSpec.describe Entities::Game do
         entity.roll(8),
         entity.roll(6)
       ]
-      model.reload
+      entity = game_repository.find(entity.id)
 
       expect(entity.state).to eq('finished')
       expect(results.uniq).to eq([true])
@@ -70,9 +70,13 @@ RSpec.describe Entities::Game do
   end
 
   def create_game
-    game_model = FactoryBot.create(:game)
-    FactoryBot.create(:frame, game_id: game_model.id)
+    model = FactoryBot.create(:game)
+    FactoryBot.create(:frame, game_id: model.id)
 
-    game_model
+    Serializers::Db::Game.new.from(model)
+  end
+
+  def game_repository
+    @game_repository ||= Repositories::Game.new
   end
 end

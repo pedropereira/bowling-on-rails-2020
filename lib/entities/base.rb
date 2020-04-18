@@ -2,18 +2,14 @@
 
 module Entities
   class Base
-    delegate :id, to: :model
+    attr_reader :id
 
-    def initialize(model)
-      @model = model
+    def initialize(id:)
+      @id = id
     end
 
     def ==(other)
       self.class == other.class && id == other.id
     end
-
-    private
-
-    attr_reader :model
   end
 end

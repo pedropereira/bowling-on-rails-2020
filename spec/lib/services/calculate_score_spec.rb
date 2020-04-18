@@ -44,7 +44,8 @@ RSpec.describe Services::CalculateScore do
       end
     end
 
-    Entities::Game.new(game)
+    attributes = Serializers::Db::Game.new.from(game)
+    Entities::Game.new(attributes)
   end
 
   def spares_with_bonus_roll_game
@@ -62,7 +63,8 @@ RSpec.describe Services::CalculateScore do
       end
     end
 
-    Entities::Game.new(game)
+    attributes = Serializers::Db::Game.new.from(game)
+    Entities::Game.new(attributes)
   end
 
   def uncle_bob_game
@@ -80,6 +82,7 @@ RSpec.describe Services::CalculateScore do
       end
     end
 
-    Entities::Game.new(game)
+    attributes = Serializers::Db::Game.new.from(game)
+    Entities::Game.new(attributes)
   end
 end

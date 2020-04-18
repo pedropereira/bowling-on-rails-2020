@@ -12,20 +12,29 @@ module Repositories
 
     def create(attributes = {})
       model = db.create!(attributes)
+      attributes = attributes_from(model)
 
-      entity.new(model)
+      entity.new(attributes)
     end
 
     def find(id)
       model = db.find(id)
+      attributes = attributes_from(model)
 
-      entity.new(model)
+      entity.new(attributes)
     end
 
-    def update(game, attributes)
-      model = db.update(game.id, attributes)
+    def update(game_id, attributes)
+      model = db.update(game_id, attributes)
+      attributes = attributes_from(model)
 
-      entity.new(model)
+      entity.new(attributes)
+    end
+
+    private
+
+    def attributes_from(model)
+      Serializers::Db::Game.new.from(model)
     end
   end
 end

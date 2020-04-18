@@ -29,8 +29,9 @@ RSpec.describe Serializers::Json::Game do
         )
       ]
     )
+    attributes = Serializers::Db::Game.new.from(model)
 
-    Entities::Game.new(model)
+    Entities::Game.new(attributes)
   end
 
   def build_payload(game)

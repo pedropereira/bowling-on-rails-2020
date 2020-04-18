@@ -28,9 +28,10 @@ module Entities
       end
 
       def start_new_frame
-        kind = game.frames.count < 9 ? Entities::Frame::REGULAR : Entities::Frame::TENTH
+        frames = frame_repository.all(filters: { game_id: game_id })
+        kind = frames.count < 9 ? Entities::Frame::REGULAR : Entities::Frame::TENTH
 
-        frame_repository.create(game_id: game.id, kind: kind)
+        frame_repository.create(game_id: game_id, kind: kind)
       end
     end
   end

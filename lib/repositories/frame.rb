@@ -15,20 +15,30 @@ module Repositories
       models = models.order(order) if order.present?
 
       models.map do |model|
-        constructor.new(model).call
+        attributes = attributes_from(model)
+
+        constructor.new(attributes).call
       end
     end
 
     def build(attributes = {})
       model = db.new(attributes)
+      attributes = attributes_from(model)
 
-      constructor.new(model).call
+      constructor.new(attributes).call
     end
 
     def create(attributes = {})
       model = db.create!(attributes)
+      attributes = attributes_from(model)
 
-      constructor.new(model).call
+      constructor.new(attributes).call
+    end
+
+    private
+
+    def attributes_from(model)
+      Serializers::Db::Frame.new.from(model)
     end
   end
 end

@@ -3,18 +3,18 @@
 module Entities
   module Frame
     class Base < Entities::Base
-      attr_reader :game
+      attr_reader :created_at
+      attr_reader :game_id
+      attr_reader :kind
+      attr_reader :updated_at
 
-      delegate :created_at,
-               :game_id,
-               :kind,
-               :persisted?,
-               :updated_at,
-               to: :model
+      def initialize(created_at:, id:, game_id:, kind:, updated_at:)
+        @created_at = created_at
+        @game_id = game_id
+        @kind = kind
+        @updated_at = updated_at
 
-      def initialize(model)
-        super(model)
-        @game = model.game
+        super(id: id)
       end
 
       def rolls

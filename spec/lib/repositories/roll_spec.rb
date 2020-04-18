@@ -43,7 +43,8 @@ RSpec.describe Repositories::Roll do
 
   def create_roll(params = {})
     model = FactoryBot.create(:roll, params)
+    attributes = Serializers::Db::Roll.new.from(model)
 
-    Entities::Roll.new(model)
+    Entities::Roll.new(attributes)
   end
 end

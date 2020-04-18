@@ -2,12 +2,14 @@
 
 module Constructors
   class Frame
-    def initialize(model)
-      @model = model
+    attr_reader :attributes
+
+    def initialize(attributes = {})
+      @attributes = attributes
     end
 
     def call
-      "Entities::Frame::#{@model.kind.capitalize}".constantize.new(@model)
+      "Entities::Frame::#{attributes[:kind].capitalize}".constantize.new(attributes)
     end
   end
 end

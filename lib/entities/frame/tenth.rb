@@ -28,7 +28,7 @@ module Entities
       end
 
       def finish_game
-        game_repository.update(game, state: Entities::Game::FINISHED)
+        game_repository.update(game_id, state: Entities::Game::FINISHED)
       end
     end
   end

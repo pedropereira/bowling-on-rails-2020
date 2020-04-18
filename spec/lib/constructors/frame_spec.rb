@@ -6,8 +6,9 @@ RSpec.describe Constructors::Frame do
   describe '#call' do
     it 'returns the regular frame entity' do
       model = FactoryBot.create(:frame, kind: Entities::Frame::REGULAR)
-      frame = Entities::Frame::Regular.new(model)
-      constructor = described_class.new(model)
+      attributes = Serializers::Db::Frame.new.from(model)
+      frame = Entities::Frame::Regular.new(attributes)
+      constructor = described_class.new(attributes)
 
       result = constructor.call
 
@@ -16,8 +17,9 @@ RSpec.describe Constructors::Frame do
 
     it 'returns the tenth frame entity' do
       model = FactoryBot.create(:frame, kind: Entities::Frame::TENTH)
-      frame = Entities::Frame::Tenth.new(model)
-      constructor = described_class.new(model)
+      attributes = Serializers::Db::Frame.new.from(model)
+      frame = Entities::Frame::Tenth.new(attributes)
+      constructor = described_class.new(attributes)
 
       result = constructor.call
 

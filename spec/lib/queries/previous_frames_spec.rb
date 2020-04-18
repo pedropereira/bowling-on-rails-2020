@@ -19,13 +19,15 @@ RSpec.describe Queries::PreviousFrames do
 
   def create_game
     model = FactoryBot.create(:game)
+    attributes = Serializers::Db::Game.new.from(model)
 
-    Entities::Game.new(model)
+    Entities::Game.new(attributes)
   end
 
   def create_frame(params = {})
     model = FactoryBot.create(:frame, params)
+    attributes = Serializers::Db::Frame.new.from(model)
 
-    Constructors::Frame.new(model).call
+    Constructors::Frame.new(attributes).call
   end
 end

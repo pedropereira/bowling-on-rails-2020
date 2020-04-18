@@ -15,14 +15,23 @@ module Repositories
       models = models.order(order) if order.present?
 
       models.map do |model|
-        entity.new(model)
+        attributes = attributes_from(model)
+
+        entity.new(attributes)
       end
     end
 
     def create(attributes = {})
       model = db.create!(attributes)
+      attributes = attributes_from(model)
 
-      entity.new(model)
+      entity.new(attributes)
+    end
+
+    private
+
+    def attributes_from(model)
+      Serializers::Db::Roll.new.from(model)
     end
   end
 end

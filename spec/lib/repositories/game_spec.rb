@@ -41,7 +41,7 @@ RSpec.describe Repositories::Game do
       game = create_game(state: Entities::Game::ONGOING)
       repository = described_class.new
 
-      result = repository.update(game, state: Entities::Game::FINISHED)
+      result = repository.update(game.id, state: Entities::Game::FINISHED)
 
       expect(result.state).to eq('finished')
     end
@@ -49,7 +49,8 @@ RSpec.describe Repositories::Game do
 
   def create_game(params = {})
     model = FactoryBot.create(:game, params)
+    attributes = Serializers::Db::Game.new.from(model)
 
-    Entities::Game.new(model)
+    Entities::Game.new(attributes)
   end
 end
