@@ -46,8 +46,8 @@ module Entities
     end
 
     def regular_frames(frames)
-      9.times.map do |i|
-        frames[i] || build_frame(kind: Entities::Frame::REGULAR)
+      9.times.map do |index|
+        frames[index] || build_frame(kind: Entities::Frame::REGULAR)
       end
     end
 
