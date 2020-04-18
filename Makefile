@@ -16,5 +16,5 @@ server:
 stats:
 	bundle exec rails stats
 
-tests:
+specs:
 	bundle exec rspec
