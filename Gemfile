@@ -9,7 +9,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bundler-audit'
 gem 'dry-validation'
 gem 'puma', '>= 4.3.3'
-gem 'rails', '~> 6.0.1'
+gem 'rails', '>= 6.0.2.2'
 gem 'reek'
 gem 'rubocop', require: false
 gem 'sqlite3', '~> 1.4'
