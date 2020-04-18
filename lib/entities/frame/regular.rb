@@ -2,7 +2,7 @@
 
 module Entities
   module Frame
-    class Regular < Entities::Frame::Base
+    class Regular < Base
       def roll(pins)
         roll_repository.create(frame_id: id, pins: pins)
 
@@ -27,9 +27,10 @@ module Entities
         (open? && rolls_done?(2)) || strike? || spare?
       end
 
-      # TODO: FIX THIS
       def start_new_frame
-        frame_repository.create(game_id: game.id, kind: Entities::Frame::REGULAR)
+        kind = game.frames.count < 9 ? Entities::Frame::REGULAR : Entities::Frame::TENTH
+
+        frame_repository.create(game_id: game.id, kind: kind)
       end
     end
   end
