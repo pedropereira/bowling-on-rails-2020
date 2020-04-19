@@ -17,7 +17,7 @@ module Forms
     end
 
     def to_s
-      errors.map { |key, message| [key, message].join(' ') }.join(', ')
+      errors.map { |key, message| [key, message].join(" ") }.join(", ")
     end
   end
 end

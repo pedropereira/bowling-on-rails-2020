@@ -4,7 +4,7 @@ class CreateRolls < ActiveRecord::Migration[6.0]
       t.integer :pins
       t.timestamps null: false
 
-      t.references :frame, index: true, foreign_key: { on_delete: :cascade }
+      t.references :frame, index: true, foreign_key: {on_delete: :cascade}
     end
   end
 end

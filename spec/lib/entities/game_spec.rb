@@ -1,39 +1,39 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Entities::Game do
-  describe '#roll' do
-    it 'produces a perfect game (only strikes) with two bonus rolls in the final frame' do
+  describe "#roll" do
+    it "produces a perfect game (only strikes) with two bonus rolls in the final frame" do
       attributes = create_game
       entity = described_class.new(attributes)
 
       results = 12.times.map { entity.roll(10) }
       entity = game_repository.find(entity.id)
 
-      expect(entity.state).to eq('finished')
+      expect(entity.state).to eq("finished")
       expect(results.uniq).to eq([true])
     end
 
-    it 'produces a game with a bonus roll after a spare in the final frame' do
+    it "produces a game with a bonus roll after a spare in the final frame" do
       attributes = create_game
       entity = described_class.new(attributes)
 
       results = 21.times.map { entity.roll(5) }
       entity = game_repository.find(entity.id)
 
-      expect(entity.state).to eq('finished')
+      expect(entity.state).to eq("finished")
       expect(results.uniq).to eq([true])
     end
 
-    it 'produces a game with no strikes nor spares' do
+    it "produces a game with no strikes nor spares" do
       attributes = create_game
       entity = described_class.new(attributes)
 
       results = 20.times.map { entity.roll(3) }
       entity = game_repository.find(entity.id)
 
-      expect(entity.state).to eq('finished')
+      expect(entity.state).to eq("finished")
       expect(results.uniq).to eq([true])
     end
 
@@ -64,7 +64,7 @@ RSpec.describe Entities::Game do
       ]
       entity = game_repository.find(entity.id)
 
-      expect(entity.state).to eq('finished')
+      expect(entity.state).to eq("finished")
       expect(results.uniq).to eq([true])
     end
   end

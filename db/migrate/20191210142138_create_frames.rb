@@ -4,7 +4,7 @@ class CreateFrames < ActiveRecord::Migration[6.0]
       t.string :kind, null: false
       t.timestamps null: false
 
-      t.references :game, index: true, foreign_key: { on_delete: :cascade }
+      t.references :game, index: true, foreign_key: {on_delete: :cascade}
     end
   end
 end

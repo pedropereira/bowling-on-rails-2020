@@ -2,8 +2,8 @@
 
 module Entities
   class Game < Base
-    FINISHED = 'finished'
-    ONGOING = 'ongoing'
+    FINISHED = "finished"
+    ONGOING = "ongoing"
 
     attr_reader :created_at
     attr_reader :state
@@ -18,7 +18,7 @@ module Entities
     end
 
     def frames
-      frames = frame_repository.all(filters: { game_id: id }, order: { created_at: :asc })
+      frames = frame_repository.all(filters: {game_id: id}, order: {created_at: :asc})
 
       regular_frames(frames) + [tenth_frame(frames)]
     end
@@ -38,7 +38,7 @@ module Entities
     end
 
     def current_frame
-      frames.select(&:id).last
+      frames.reverse.find(&:id)
     end
 
     def frame_repository

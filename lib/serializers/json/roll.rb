@@ -12,7 +12,7 @@ module Serializers
       def to
         {
           "id": roll.id,
-          "type": 'roll',
+          "type": "roll",
           "attributes": {
             "pins": roll.pins
           }

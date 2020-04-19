@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Services::CalculateScore do
-  describe '#for_game' do
-    it 'calculates the total score for a perfect game (only strikes)' do
+  describe "#for_game" do
+    it "calculates the total score for a perfect game (only strikes)" do
       calculate_score = described_class.new
 
       result = calculate_score.for_game(perfect_game)
@@ -12,7 +12,7 @@ RSpec.describe Services::CalculateScore do
       expect(result).to eq(300)
     end
 
-    it 'calculates the total score for a game full of spares and a bonus roll' do
+    it "calculates the total score for a game full of spares and a bonus roll" do
       calculate_score = described_class.new
 
       result = calculate_score.for_game(spares_with_bonus_roll_game)
@@ -31,9 +31,9 @@ RSpec.describe Services::CalculateScore do
 
   def perfect_game
     game = FactoryBot.create(:game)
-    frames = 10.times.map do
+    frames = 10.times.map {
       FactoryBot.create(:frame, game_id: game.id)
-    end
+    }
     frame_scores = [
       [10], [10], [10], [10], [10], [10], [10], [10], [10], [10, 10, 10]
     ]
@@ -50,9 +50,9 @@ RSpec.describe Services::CalculateScore do
 
   def spares_with_bonus_roll_game
     game = FactoryBot.create(:game)
-    frames = 10.times.map do
+    frames = 10.times.map {
       FactoryBot.create(:frame, game_id: game.id)
-    end
+    }
     frame_scores = [
       [5, 5], [5, 5], [5, 5], [5, 5], [5, 5], [5, 5], [5, 5], [5, 5], [5, 5], [5, 5, 5]
     ]
@@ -69,9 +69,9 @@ RSpec.describe Services::CalculateScore do
 
   def uncle_bob_game
     game = FactoryBot.create(:game)
-    frames = 10.times.map do
+    frames = 10.times.map {
       FactoryBot.create(:frame, game_id: game.id)
-    end
+    }
     frame_scores = [
       [1, 4], [4, 5], [6, 4], [5, 5], [10], [0, 1], [7, 3], [6, 4], [10], [2, 8, 6]
     ]

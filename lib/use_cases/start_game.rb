@@ -4,7 +4,7 @@ module UseCases
   class StartGame
     def call
       game = game_repository.create
-      frame_repository.create(game_id: game.id, kind: 'regular')
+      frame_repository.create(game_id: game.id, kind: "regular")
 
       game
     end

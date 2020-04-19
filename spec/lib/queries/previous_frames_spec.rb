@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Queries::PreviousFrames do
-  describe '#call' do
-    it 'returns the previous frames relative to the current frame' do
+  describe "#call" do
+    it "returns the previous frames relative to the current frame" do
       game = create_game
       frame1 = create_frame(game_id: game.id, created_at: Time.now - 2.minutes)
       frame2 = create_frame(game_id: game.id, created_at: Time.now - 1.minute)

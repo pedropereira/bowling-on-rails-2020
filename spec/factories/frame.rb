@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :frame do
-    kind { 'regular' }
+    kind { "regular" }
 
     association :game
   end

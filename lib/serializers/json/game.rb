@@ -14,7 +14,7 @@ module Serializers
         {
           "data": {
             "id": game.id,
-            "type": 'game',
+            "type": "game",
             "attributes": {
               "state": game.state,
               "score": Services::CalculateScore.new.for_game(game)

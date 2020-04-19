@@ -1,3 +1,9 @@
+require:
+  - standard/cop/semantic_blocks
+
+inherit_gem:
+  standard: config/base.yml
+
 AllCops:
   Exclude:
     - 'bin/**/*'
@@ -10,15 +16,6 @@ AllCops:
 
 Layout/LineLength:
   Max: 100
-
-Layout/SpaceAroundMethodCallOperator:
-  Enabled: true
-
-Lint/RaiseException:
-  Enabled: true
-
-Lint/StructNewOverride:
-  Enabled: true
 
 Metrics/AbcSize:
   Exclude:
@@ -34,9 +31,6 @@ Metrics/MethodLength:
 
 Style/Documentation:
   Enabled: false
-
-Style/ExponentialNotation:
-  Enabled: true
 
 Style/HashEachMethods:
   Enabled: true

@@ -18,7 +18,7 @@ module Entities
       end
 
       def rolls
-        roll_repository.all(filters: { frame_id: id }, order: { created_at: :asc })
+        roll_repository.all(filters: {frame_id: id}, order: {created_at: :asc})
       end
 
       def rolls_done?(number)

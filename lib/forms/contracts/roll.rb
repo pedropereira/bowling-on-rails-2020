@@ -9,7 +9,7 @@ module Forms
       end
 
       rule(:pins) do
-        key.failure('must be a value between 0 and 10') if value.negative? || value > 10
+        key.failure("must be a value between 0 and 10") if value.negative? || value > 10
       end
     end
   end

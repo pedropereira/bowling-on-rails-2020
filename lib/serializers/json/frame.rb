@@ -13,7 +13,7 @@ module Serializers
       def to
         {
           "id": frame.id,
-          "type": 'frame',
+          "type": "frame",
           "attributes": {
             "score": Services::CalculateScore.new.for_frame(frame)
           },

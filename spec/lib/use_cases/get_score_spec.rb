@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe UseCases::GetScore do
-  describe '#call' do
-    it 'returns game score payload' do
+  describe "#call" do
+    it "returns game score payload" do
       game = build_game
 
       result = described_class.new.call(game.id)
@@ -41,9 +41,9 @@ RSpec.describe UseCases::GetScore do
     {
       data: {
         id: game_id,
-        type: 'game',
+        type: "game",
         attributes: {
-          state: 'ongoing',
+          state: "ongoing",
           score: 10
         },
         relationships: {
@@ -51,7 +51,7 @@ RSpec.describe UseCases::GetScore do
             data: [
               {
                 id: frame_id,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
@@ -60,7 +60,7 @@ RSpec.describe UseCases::GetScore do
                     data: [
                       {
                         id: roll_id,
-                        type: 'roll',
+                        type: "roll",
                         attributes: {
                           pins: 10
                         }
@@ -71,7 +71,7 @@ RSpec.describe UseCases::GetScore do
               },
               {
                 id: nil,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
@@ -83,7 +83,7 @@ RSpec.describe UseCases::GetScore do
               },
               {
                 id: nil,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
@@ -95,7 +95,7 @@ RSpec.describe UseCases::GetScore do
               },
               {
                 id: nil,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
@@ -107,7 +107,7 @@ RSpec.describe UseCases::GetScore do
               },
               {
                 id: nil,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
@@ -119,7 +119,7 @@ RSpec.describe UseCases::GetScore do
               },
               {
                 id: nil,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
@@ -131,7 +131,7 @@ RSpec.describe UseCases::GetScore do
               },
               {
                 id: nil,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
@@ -143,7 +143,7 @@ RSpec.describe UseCases::GetScore do
               },
               {
                 id: nil,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
@@ -155,7 +155,7 @@ RSpec.describe UseCases::GetScore do
               },
               {
                 id: nil,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
@@ -167,7 +167,7 @@ RSpec.describe UseCases::GetScore do
               },
               {
                 id: nil,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },

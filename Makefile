@@ -13,8 +13,11 @@ rubocop:
 server:
 	bundle exec rails s
 
-stats:
-	bundle exec rails stats
-
 specs:
 	bundle exec rspec
+
+standard:
+	bundle exec standardrb --fix
+
+stats:
+	bundle exec rails stats

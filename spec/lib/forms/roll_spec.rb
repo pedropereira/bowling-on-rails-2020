@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Forms::Roll do
-  describe '#call' do
-    it 'returns false if id is missing' do
-      form = described_class.new(pins: '10')
+  describe "#call" do
+    it "returns false if id is missing" do
+      form = described_class.new(pins: "10")
 
       result = form.call
 
       expect(result).to eq(false)
     end
 
-    it 'returns false if pins is missing' do
+    it "returns false if pins is missing" do
       form = described_class.new(id: 1)
 
       result = form.call
@@ -20,7 +20,7 @@ RSpec.describe Forms::Roll do
       expect(result).to eq(false)
     end
 
-    it 'returns false if game is already finished' do
+    it "returns false if game is already finished" do
       game = FactoryBot.build_stubbed(:game, state: Entities::Game::FINISHED)
       form = described_class.new(id: game.id)
 
@@ -29,72 +29,72 @@ RSpec.describe Forms::Roll do
       expect(result).to eq(false)
     end
 
-    it 'set error if id and pins are missing' do
+    it "set error if id and pins are missing" do
       form = described_class.new
 
       form.call
 
-      expect(form.errors).to eq('id is missing, pins is missing')
+      expect(form.errors).to eq("id is missing, pins is missing")
     end
 
-    it 'set error if id is missing' do
+    it "set error if id is missing" do
       form = described_class.new(pins: 10)
 
       form.call
 
-      expect(form.errors).to eq('id is missing')
+      expect(form.errors).to eq("id is missing")
     end
 
-    it 'set error if id is not an integer' do
-      form = described_class.new(id: 'a', pins: 10)
+    it "set error if id is not an integer" do
+      form = described_class.new(id: "a", pins: 10)
 
       form.call
 
-      expect(form.errors).to eq('id must be an integer')
+      expect(form.errors).to eq("id must be an integer")
     end
 
-    it 'set error if pins is missing' do
+    it "set error if pins is missing" do
       form = described_class.new(id: 1)
 
       form.call
 
-      expect(form.errors).to eq('pins is missing')
+      expect(form.errors).to eq("pins is missing")
     end
 
-    it 'set error if pins is not an integer' do
-      form = described_class.new(id: 1, pins: 'a')
+    it "set error if pins is not an integer" do
+      form = described_class.new(id: 1, pins: "a")
 
       form.call
 
-      expect(form.errors).to eq('pins must be an integer')
+      expect(form.errors).to eq("pins must be an integer")
     end
 
-    it 'set error if pins is out of range I' do
+    it "set error if pins is out of range I" do
       form = described_class.new(id: 1, pins: 12)
 
       form.call
 
-      expect(form.errors).to eq('pins must be a value between 0 and 10')
+      expect(form.errors).to eq("pins must be a value between 0 and 10")
     end
 
-    it 'set error if pins is out of range II' do
+    it "set error if pins is out of range II" do
       form = described_class.new(id: 1, pins: -1)
 
       form.call
 
-      expect(form.errors).to eq('pins must be a value between 0 and 10')
+      expect(form.errors).to eq("pins must be a value between 0 and 10")
     end
 
-    it 'set error if game is already finished' do
+    it "set error if game is already finished" do
       game = FactoryBot.create(:game, state: Entities::Game::FINISHED)
       form = described_class.new(id: game.id, pins: 10)
 
       form.call
 
-      expect(form.errors).to eq('game is already finished')
+      expect(form.errors).to eq("game is already finished")
     end
 
-    it 'returns true if roll was successful' do
+    it "returns true if roll was successful" do
       game = FactoryBot.create(
         :game, state: Entities::Game::ONGOING, frames: [FactoryBot.create(:frame)]
       )

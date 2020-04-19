@@ -2,7 +2,7 @@
 
 module Entities
   module Frame
-    REGULAR = 'regular'
-    TENTH = 'tenth'
+    REGULAR = "regular"
+    TENTH = "tenth"
   end
 end

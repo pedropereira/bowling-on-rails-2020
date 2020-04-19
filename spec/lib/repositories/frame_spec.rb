@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Repositories::Frame do
-  describe '#all' do
-    it 'returns all frames' do
+  describe "#all" do
+    it "returns all frames" do
       frame1 = create_frame
       frame2 = create_frame
       repository = described_class.new
@@ -15,8 +15,8 @@ RSpec.describe Repositories::Frame do
     end
   end
 
-  describe '#build' do
-    it 'builds a new frame' do
+  describe "#build" do
+    it "builds a new frame" do
       game = build_stubbed_game
       repository = described_class.new
 
@@ -26,14 +26,14 @@ RSpec.describe Repositories::Frame do
       expect(result.created_at).to eq(nil)
       expect(result.game_id).to eq(game.id)
       expect(result.id).to eq(nil)
-      expect(result.kind).to eq('tenth')
+      expect(result.kind).to eq("tenth")
       expect(result.rolls).to eq([])
       expect(result.updated_at).to eq(nil)
     end
   end
 
-  describe '#create' do
-    it 'creates a new frame' do
+  describe "#create" do
+    it "creates a new frame" do
       game = create_game
       repository = described_class.new
 
@@ -43,7 +43,7 @@ RSpec.describe Repositories::Frame do
       expect(result.created_at).to_not eq(nil)
       expect(result.game_id).to eq(game.id)
       expect(result.id).to_not eq(nil)
-      expect(result.kind).to eq('regular')
+      expect(result.kind).to eq("regular")
       expect(result.rolls).to eq([])
       expect(result.updated_at).to_not eq(nil)
     end

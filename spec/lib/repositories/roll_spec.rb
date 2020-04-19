@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Repositories::Roll do
-  describe '#all' do
-    it 'returns all rolls' do
+  describe "#all" do
+    it "returns all rolls" do
       roll1 = create_roll
       roll2 = create_roll
       repository = described_class.new
@@ -14,20 +14,20 @@ RSpec.describe Repositories::Roll do
       expect(result).to eq([roll1, roll2])
     end
 
-    it 'returns filtered rolls' do
+    it "returns filtered rolls" do
       frame_id = FactoryBot.create(:frame).id
       create_roll
       roll = create_roll(frame_id: frame_id)
       repository = described_class.new
 
-      result = repository.all(filters: { frame_id: frame_id })
+      result = repository.all(filters: {frame_id: frame_id})
 
       expect(result).to eq([roll])
     end
   end
 
-  describe '#create' do
-    it 'creates a new roll' do
+  describe "#create" do
+    it "creates a new roll" do
       frame = FactoryBot.create(:frame)
       repository = described_class.new
 

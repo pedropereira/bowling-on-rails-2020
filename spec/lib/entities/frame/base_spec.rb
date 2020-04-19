@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Entities::Frame::Base do
-  describe '#rolls' do
-    it 'returns rolls that belong the frame' do
+  describe "#rolls" do
+    it "returns rolls that belong the frame" do
       attributes = create_frame
       roll1 = create_roll(frame_id: attributes[:id])
       roll2 = create_roll(frame_id: attributes[:id])
@@ -17,8 +17,8 @@ RSpec.describe Entities::Frame::Base do
     end
   end
 
-  describe '#rolls_done?' do
-    it 'returns true' do
+  describe "#rolls_done?" do
+    it "returns true" do
       attributes = create_frame(rolls: [FactoryBot.create(:roll), FactoryBot.create(:roll)])
       entity = described_class.new(attributes)
 
@@ -27,7 +27,7 @@ RSpec.describe Entities::Frame::Base do
       expect(result).to eq(true)
     end
 
-    it 'returns false' do
+    it "returns false" do
       attributes = create_frame(rolls: [FactoryBot.create(:roll)])
       entity = described_class.new(attributes)
 

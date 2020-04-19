@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Entities::Frame::Tenth do
-  describe '#roll' do
-    it 'produces a strike' do
+  describe "#roll" do
+    it "produces a strike" do
       attributes = create_frame
       entity = described_class.new(attributes)
 
@@ -14,7 +14,7 @@ RSpec.describe Entities::Frame::Tenth do
       expect(entity.rolls.count).to eq(1)
     end
 
-    it 'produces a spare' do
+    it "produces a spare" do
       attributes = create_frame
       entity = described_class.new(attributes)
 
@@ -25,7 +25,7 @@ RSpec.describe Entities::Frame::Tenth do
       expect(entity.rolls.count).to eq(2)
     end
 
-    it 'produces one roll' do
+    it "produces one roll" do
       attributes = create_frame
       entity = described_class.new(attributes)
 
@@ -35,7 +35,7 @@ RSpec.describe Entities::Frame::Tenth do
       expect(entity.rolls.count).to eq(1)
     end
 
-    it 'produces two rolls' do
+    it "produces two rolls" do
       attributes = create_frame
       entity = described_class.new(attributes)
 
@@ -46,7 +46,7 @@ RSpec.describe Entities::Frame::Tenth do
       expect(entity.rolls.count).to eq(2)
     end
 
-    it 'produces three rolls' do
+    it "produces three rolls" do
       attributes = create_frame
       entity = described_class.new(attributes)
 
@@ -59,8 +59,8 @@ RSpec.describe Entities::Frame::Tenth do
     end
   end
 
-  describe '#open?' do
-    it 'returns true for no rolls' do
+  describe "#open?" do
+    it "returns true for no rolls" do
       attributes = create_frame
       entity = described_class.new(attributes)
 
@@ -69,7 +69,7 @@ RSpec.describe Entities::Frame::Tenth do
       expect(result).to eq(true)
     end
 
-    it 'returns true for one roll' do
+    it "returns true for one roll" do
       attributes = create_frame(rolls: [FactoryBot.create(:roll)])
       entity = described_class.new(attributes)
 
@@ -78,7 +78,7 @@ RSpec.describe Entities::Frame::Tenth do
       expect(result).to eq(true)
     end
 
-    it 'returns true for two rolls' do
+    it "returns true for two rolls" do
       attributes = create_frame(rolls: [FactoryBot.create(:roll), FactoryBot.create(:roll)])
       entity = described_class.new(attributes)
 
@@ -87,7 +87,7 @@ RSpec.describe Entities::Frame::Tenth do
       expect(result).to eq(true)
     end
 
-    it 'returns false for a strike' do
+    it "returns false for a strike" do
       attributes = create_frame(rolls: [FactoryBot.create(:roll, pins: 10)])
       entity = described_class.new(attributes)
 
@@ -96,7 +96,7 @@ RSpec.describe Entities::Frame::Tenth do
       expect(result).to eq(false)
     end
 
-    it 'returns false for a spare' do
+    it "returns false for a spare" do
       attributes = create_frame(
         rolls: [FactoryBot.create(:roll, pins: 5), FactoryBot.create(:roll, pins: 5)]
       )
@@ -108,8 +108,8 @@ RSpec.describe Entities::Frame::Tenth do
     end
   end
 
-  describe '#strike?' do
-    it 'returns true' do
+  describe "#strike?" do
+    it "returns true" do
       attributes = create_frame(rolls: [FactoryBot.create(:roll, pins: 10)])
       entity = described_class.new(attributes)
 
@@ -118,7 +118,7 @@ RSpec.describe Entities::Frame::Tenth do
       expect(result).to eq(true)
     end
 
-    it 'returns false for no rolls' do
+    it "returns false for no rolls" do
       attributes = create_frame
       entity = described_class.new(attributes)
 
@@ -127,7 +127,7 @@ RSpec.describe Entities::Frame::Tenth do
       expect(result).to eq(false)
     end
 
-    it 'returns false for one roll' do
+    it "returns false for one roll" do
       attributes = create_frame(rolls: [FactoryBot.create(:roll)])
       entity = described_class.new(attributes)
 
@@ -136,7 +136,7 @@ RSpec.describe Entities::Frame::Tenth do
       expect(result).to eq(false)
     end
 
-    it 'returns false for two rolls' do
+    it "returns false for two rolls" do
       attributes = create_frame(rolls: [FactoryBot.create(:roll), FactoryBot.create(:roll)])
       entity = described_class.new(attributes)
 
@@ -145,7 +145,7 @@ RSpec.describe Entities::Frame::Tenth do
       expect(result).to eq(false)
     end
 
-    it 'returns false for a spare' do
+    it "returns false for a spare" do
       attributes = create_frame(
         rolls: [FactoryBot.create(:roll, pins: 5), FactoryBot.create(:roll, pins: 5)]
       )
@@ -157,8 +157,8 @@ RSpec.describe Entities::Frame::Tenth do
     end
   end
 
-  describe '#spare?' do
-    it 'returns true' do
+  describe "#spare?" do
+    it "returns true" do
       attributes = create_frame(
         rolls: [FactoryBot.create(:roll, pins: 5), FactoryBot.create(:roll, pins: 5)]
       )
@@ -169,7 +169,7 @@ RSpec.describe Entities::Frame::Tenth do
       expect(result).to eq(true)
     end
 
-    it 'returns false for no rolls' do
+    it "returns false for no rolls" do
       attributes = create_frame
       entity = described_class.new(attributes)
 
@@ -178,7 +178,7 @@ RSpec.describe Entities::Frame::Tenth do
       expect(result).to eq(false)
     end
 
-    it 'returns false for one roll' do
+    it "returns false for one roll" do
       attributes = create_frame(rolls: [FactoryBot.create(:roll)])
       entity = described_class.new(attributes)
 
@@ -187,7 +187,7 @@ RSpec.describe Entities::Frame::Tenth do
       expect(result).to eq(false)
     end
 
-    it 'returns false for two rolls' do
+    it "returns false for two rolls" do
       attributes = create_frame(rolls: [FactoryBot.create(:roll), FactoryBot.create(:roll)])
       entity = described_class.new(attributes)
 
@@ -196,7 +196,7 @@ RSpec.describe Entities::Frame::Tenth do
       expect(result).to eq(false)
     end
 
-    it 'returns false for a strike' do
+    it "returns false for a strike" do
       attributes = create_frame(rolls: [FactoryBot.create(:roll, pins: 10)])
       entity = described_class.new(attributes)
 

@@ -32,9 +32,9 @@ module Forms
       successful_roll = game.roll(pins.to_i)
 
       if successful_roll
-        { game_id: game.id }
+        {game_id: game.id}
       else
-        @errors.add(game: 'is already finished')
+        @errors.add(game: "is already finished")
         false
       end
     end

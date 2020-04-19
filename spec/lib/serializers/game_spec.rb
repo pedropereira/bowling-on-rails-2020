@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Serializers::Json::Game do
-  describe '#to' do
-    it 'returns the serialized payload of a game' do
+  describe "#to" do
+    it "returns the serialized payload of a game" do
       game = build_game
       serializer = described_class.new(game)
 
@@ -42,9 +42,9 @@ RSpec.describe Serializers::Json::Game do
     {
       data: {
         id: game_id,
-        type: 'game',
+        type: "game",
         attributes: {
-          state: 'ongoing',
+          state: "ongoing",
           score: 10
         },
         relationships: {
@@ -52,7 +52,7 @@ RSpec.describe Serializers::Json::Game do
             data: [
               {
                 id: frame_id,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
@@ -61,7 +61,7 @@ RSpec.describe Serializers::Json::Game do
                     data: [
                       {
                         id: roll_id,
-                        type: 'roll',
+                        type: "roll",
                         attributes: {
                           pins: 10
                         }
@@ -72,7 +72,7 @@ RSpec.describe Serializers::Json::Game do
               },
               {
                 id: nil,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
@@ -84,7 +84,7 @@ RSpec.describe Serializers::Json::Game do
               },
               {
                 id: nil,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
@@ -96,7 +96,7 @@ RSpec.describe Serializers::Json::Game do
               },
               {
                 id: nil,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
@@ -108,7 +108,7 @@ RSpec.describe Serializers::Json::Game do
               },
               {
                 id: nil,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
@@ -120,7 +120,7 @@ RSpec.describe Serializers::Json::Game do
               },
               {
                 id: nil,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
@@ -132,7 +132,7 @@ RSpec.describe Serializers::Json::Game do
               },
               {
                 id: nil,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
@@ -144,7 +144,7 @@ RSpec.describe Serializers::Json::Game do
               },
               {
                 id: nil,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
@@ -156,7 +156,7 @@ RSpec.describe Serializers::Json::Game do
               },
               {
                 id: nil,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
@@ -168,7 +168,7 @@ RSpec.describe Serializers::Json::Game do
               },
               {
                 id: nil,
-                type: 'frame',
+                type: "frame",
                 attributes: {
                   score: 0
                 },
