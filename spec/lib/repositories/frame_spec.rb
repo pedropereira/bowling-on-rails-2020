@@ -17,7 +17,7 @@ RSpec.describe Repositories::Frame do
 
   describe '#build' do
     it 'builds a new frame' do
-      game = create_game
+      game = build_stubbed_game
       repository = described_class.new
 
       result = repository.build(game_id: game.id, kind: Entities::Frame::TENTH)
@@ -58,6 +58,13 @@ RSpec.describe Repositories::Frame do
 
   def create_game
     model = FactoryBot.create(:game)
+    attributes = Serializers::Db::Game.new.from(model)
+
+    Entities::Game.new(attributes)
+  end
+
+  def build_stubbed_game
+    model = FactoryBot.build_stubbed(:game)
     attributes = Serializers::Db::Game.new.from(model)
 
     Entities::Game.new(attributes)

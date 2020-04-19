@@ -70,8 +70,7 @@ RSpec.describe Entities::Game do
   end
 
   def create_game
-    model = FactoryBot.create(:game)
-    FactoryBot.create(:frame, game_id: model.id)
+    model = FactoryBot.create(:game, frames: [FactoryBot.create(:frame)])
 
     Serializers::Db::Game.new.from(model)
   end

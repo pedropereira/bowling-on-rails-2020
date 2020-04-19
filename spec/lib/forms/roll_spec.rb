@@ -21,7 +21,7 @@ RSpec.describe Forms::Roll do
     end
 
     it 'returns false if game is already finished' do
-      game = FactoryBot.create(:game, state: Entities::Game::FINISHED)
+      game = FactoryBot.build_stubbed(:game, state: Entities::Game::FINISHED)
       form = described_class.new(id: game.id)
 
       result = form.call
