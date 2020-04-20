@@ -4,6 +4,12 @@ audit:
 brakeman:
 	bundle exec brakeman --run-all-checks
 
+dbuild:
+	docker-compose build
+
+drun:
+	docker-compose up
+
 reek:
 	bundle exec reek
 
