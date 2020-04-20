@@ -19,6 +19,7 @@ group :development, :test do
   gem "brakeman"
   gem "bullet"
   gem "byebug", platforms: %i[mri mingw x64_mingw]
+  gem 'dotenv-rails'
   gem "factory_bot_rails"
   gem "rspec-rails"
   gem "standard"
