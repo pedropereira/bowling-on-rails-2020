@@ -9,7 +9,7 @@ RSpec.describe UseCases::GetScore do
 
       result = described_class.new.call(game.id)
 
-      expect(result).to eq(build_payload(game))
+      expect(result).to include_json(build_payload(game))
     end
   end
 
@@ -34,13 +34,8 @@ RSpec.describe UseCases::GetScore do
   end
 
   def build_payload(game)
-    game_id = game.id
-    frame_id = game.frames.first.id
-    roll_id = game.frames.first.rolls.first.id
-
     {
       data: {
-        id: game_id,
         type: "game",
         attributes: {
           state: "ongoing",
@@ -50,7 +45,6 @@ RSpec.describe UseCases::GetScore do
           frames: {
             data: [
               {
-                id: frame_id,
                 type: "frame",
                 attributes: {
                   score: 0
@@ -59,7 +53,6 @@ RSpec.describe UseCases::GetScore do
                   rolls: {
                     data: [
                       {
-                        id: roll_id,
                         type: "roll",
                         attributes: {
                           pins: 10
@@ -70,7 +63,6 @@ RSpec.describe UseCases::GetScore do
                 }
               },
               {
-                id: nil,
                 type: "frame",
                 attributes: {
                   score: 0
@@ -82,7 +74,6 @@ RSpec.describe UseCases::GetScore do
                 }
               },
               {
-                id: nil,
                 type: "frame",
                 attributes: {
                   score: 0
@@ -94,7 +85,6 @@ RSpec.describe UseCases::GetScore do
                 }
               },
               {
-                id: nil,
                 type: "frame",
                 attributes: {
                   score: 0
@@ -106,7 +96,6 @@ RSpec.describe UseCases::GetScore do
                 }
               },
               {
-                id: nil,
                 type: "frame",
                 attributes: {
                   score: 0
@@ -118,7 +107,6 @@ RSpec.describe UseCases::GetScore do
                 }
               },
               {
-                id: nil,
                 type: "frame",
                 attributes: {
                   score: 0
@@ -130,7 +118,6 @@ RSpec.describe UseCases::GetScore do
                 }
               },
               {
-                id: nil,
                 type: "frame",
                 attributes: {
                   score: 0
@@ -142,7 +129,6 @@ RSpec.describe UseCases::GetScore do
                 }
               },
               {
-                id: nil,
                 type: "frame",
                 attributes: {
                   score: 0
@@ -154,7 +140,6 @@ RSpec.describe UseCases::GetScore do
                 }
               },
               {
-                id: nil,
                 type: "frame",
                 attributes: {
                   score: 0
@@ -166,7 +151,6 @@ RSpec.describe UseCases::GetScore do
                 }
               },
               {
-                id: nil,
                 type: "frame",
                 attributes: {
                   score: 0
