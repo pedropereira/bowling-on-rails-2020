@@ -7,11 +7,11 @@ audit:
 brakeman:
 	bundle exec brakeman --run-all-checks
 
-docker-build:
+build:
 	docker-compose build
 
-docker-up:
-	docker-compose up
+down:
+	docker-compose down
 
 reek:
 	bundle exec reek
@@ -20,10 +20,13 @@ rubocop:
 	bundle exec rubocop -a
 
 run:
-	docker-compose run api $(CMD)
+	docker-compose run --service-ports api zsh
 
 server:
-	bundle exec rails s
+	bundle exec rails s -p $(PORT) -b 0.0.0.0
+
+specs:
+	bundle exec rspec
 
 standard:
 	bundle exec standardrb --fix

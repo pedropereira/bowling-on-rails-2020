@@ -1,4 +1,25 @@
-.git*
-log/*
-tmp/*
-Dockerfile
+.git/
+.gitignore
+README.md
+
+#
+# OS X
+#
+.DS_Store
+.Trashes
+
+#
+# Rails
+#
+log/
+tmp/
+public/system
+coverage/
+spec/tmp
+
+.bundle
+
+.ruby-version
+.ruby-gemset
+
+.rvmrc

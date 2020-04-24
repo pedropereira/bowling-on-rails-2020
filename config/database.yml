@@ -1,8 +1,19 @@
+default: &default
+  adapter: postgresql
+  database: <%= ENV['DATABASE_NAME'] %>
+  encoding: utf-8
+  host: <%= ENV['DATABASE_HOST'] %>
+  password: <%= ENV['DATABASE_PASS'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
+  username: <%= ENV['DATABASE_USER'] %>
+
 development:
-  url: <%= ENV["DATABASE_URL"] %>
+  <<: *default
+  database: bowling-on-rails-development
 
 production:
-  url: <%= ENV["DATABASE_URL"] %>
+  <<: *default
 
 test:
-  url: <%= ENV["DATABASE_URL"] %>
+  <<: *default
+  database: bowling-on-rails-test

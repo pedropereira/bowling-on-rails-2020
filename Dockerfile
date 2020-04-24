@@ -3,12 +3,13 @@ FROM ruby:2.6.5-alpine
 # Set path to store the application inside of the Docker image
 ENV INSTALL_PATH /api/
 
-# Set application port
-ENV PORT 5000
-
 # Install system dependencies
 RUN apk update && \
-    apk add --no-cache build-base postgresql-dev sqlite-dev tzdata
+    apk add --no-cache build-base git less postgresql-dev tzdata vim zsh
+
+# Install powerlevel10k
+RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /root/powerlevel10k
+COPY .zshrc .p10k.zsh /root/
 
 # Create application folder
 RUN mkdir -p $INSTALL_PATH
@@ -31,4 +32,4 @@ RUN bundle install
 # Expose port to outside
 EXPOSE $PORT
 
-CMD bundle exec rails s -p $PORT -b 0.0.0.0
+CMD zsh
