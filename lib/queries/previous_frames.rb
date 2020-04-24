@@ -9,9 +9,10 @@ module Queries
     end
 
     def call
-      frame_repository.all(
-        filters: "game_id = #{frame.game_id} and created_at < '#{frame.created_at}'"
-      )
+      return [] unless frame.persisted?
+      filters = "game_id = #{frame.game_id} and created_at < '#{frame.created_at}'"
+
+      frame_repository.all(filters: filters)
     end
 
     private

@@ -17,6 +17,10 @@ module Entities
         super(id: id)
       end
 
+      def persisted?
+        id.present?
+      end
+
       def rolls
         roll_repository.all(filters: {frame_id: id}, order: {created_at: :asc})
       end

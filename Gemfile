@@ -7,9 +7,9 @@ ruby "2.6.5"
 
 gem "bootsnap", ">= 1.4.2", require: false
 gem "dry-validation", "~> 1.5.0"
+gem "pg", "~> 1.2.3"
 gem "puma", ">= 4.3.3"
 gem "rails", ">= 6.0.2.2"
-gem "sqlite3", "~> 1.4"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do

@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2019_12_10_142241) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "frames", force: :cascade do |t|
     t.string "kind", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "game_id"
+    t.bigint "game_id"
     t.index ["game_id"], name: "index_frames_on_game_id"
   end
 
@@ -30,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_12_10_142241) do
     t.integer "pins"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "frame_id"
+    t.bigint "frame_id"
     t.index ["frame_id"], name: "index_rolls_on_frame_id"
   end
 
