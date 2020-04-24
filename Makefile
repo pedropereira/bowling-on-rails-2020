@@ -1,13 +1,16 @@
+include .env.development
+export $(shell sed 's/=.*//' .env.development)
+
 audit:
 	bundle exec bundle-audit check --update
 
 brakeman:
 	bundle exec brakeman --run-all-checks
 
-dbuild:
+docker-build:
 	docker-compose build
 
-drun:
+docker-up:
 	docker-compose up
 
 reek:
@@ -16,11 +19,11 @@ reek:
 rubocop:
 	bundle exec rubocop -a
 
+run:
+	docker-compose run api $(CMD)
+
 server:
 	bundle exec rails s
-
-specs:
-	bundle exec rspec
 
 standard:
 	bundle exec standardrb --fix
