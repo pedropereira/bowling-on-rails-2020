@@ -19,11 +19,11 @@ reek:
 rubocop:
 	bundle exec rubocop -a
 
-run:
-	docker-compose run --service-ports api zsh
-
 server:
 	bundle exec rails s -p $(PORT) -b 0.0.0.0
+
+shell:
+	docker-compose run --service-ports api zsh
 
 specs:
 	bundle exec rspec
