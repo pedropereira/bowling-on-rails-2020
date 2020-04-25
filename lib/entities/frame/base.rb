@@ -22,6 +22,8 @@ module Entities
       end
 
       def rolls
+        return [] unless persisted?
+
         roll_repository.all(filters: {frame_id: id}, order: {created_at: :asc})
       end
 

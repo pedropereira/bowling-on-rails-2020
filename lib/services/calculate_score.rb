@@ -15,7 +15,7 @@ module Services
     private
 
     def for_frames(frames)
-      frames.each_with_index.reduce(0) do |sum, (frame, index)|
+      frames.select(&:persisted?).each_with_index.reduce(0) do |sum, (frame, index)|
         frame_score(frames, sum, frame, index)
       end
     end
