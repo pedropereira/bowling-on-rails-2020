@@ -20,3 +20,5 @@ services:
     image: postgres:12.2-alpine
     ports:
       - $DATABASE_PORT
+    volumes:
+      - ./db/postgres-data:/var/lib/postgresql/data
