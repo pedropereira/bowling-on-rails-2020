@@ -1,15 +1,7 @@
-FROM ruby:2.6.6-alpine
+FROM pedro/ruby-2.6.6
 
 # Set path to store the application inside of the Docker image
 ENV INSTALL_PATH /api/
-
-# Install system dependencies
-RUN apk update && \
-    apk add --no-cache build-base git less openssh postgresql-dev tzdata vim zsh
-
-# Install powerlevel10k
-RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /root/powerlevel10k
-COPY .zshrc .p10k.zsh /root/
 
 # Create application folder
 RUN mkdir -p $INSTALL_PATH
