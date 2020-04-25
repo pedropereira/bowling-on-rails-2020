@@ -5,7 +5,7 @@ ENV INSTALL_PATH /api/
 
 # Install system dependencies
 RUN apk update && \
-    apk add --no-cache build-base git less postgresql-dev tzdata vim zsh
+    apk add --no-cache build-base git less openssh postgresql-dev tzdata vim zsh
 
 # Install powerlevel10k
 RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /root/powerlevel10k
