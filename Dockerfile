@@ -1,4 +1,4 @@
-FROM pedro/ruby-2.6.6
+FROM pedro/shell
 
 # Set path to store the application inside of the Docker image
 ENV INSTALL_PATH /api/
