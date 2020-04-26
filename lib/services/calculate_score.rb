@@ -16,17 +16,19 @@ module Services
 
     def for_frames(frames)
       frames.select(&:persisted?).each_with_index.reduce(0) do |sum, (frame, index)|
-        frame_score(frames, sum, frame, index)
+        frame_score(frame: frame, frames: frames, index: index, sum: sum)
       end
     end
 
-    def frame_score(frames, sum, frame, index)
+    def frame_score(frame:, frames:, index:, sum:)
+      current_pinfall = sum + pinfall(frame)
+
       if frame.strike?
-        sum + pinfall(frame) + pinfall_from_next_two_rolls(frames, index)
+        current_pinfall + pinfall_from_next_two_rolls(frames, index)
       elsif frame.spare?
-        sum + pinfall(frame) + pinfall_from_next_roll(frames, index)
+        current_pinfall + pinfall_from_next_roll(frames, index)
       else
-        sum + pinfall(frame)
+        current_pinfall
       end
     end
 
