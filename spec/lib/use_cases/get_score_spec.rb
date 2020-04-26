@@ -9,7 +9,7 @@ RSpec.describe UseCases::GetScore do
 
       result = described_class.new.call(game.id)
 
-      expect(result).to include_json(build_payload(game))
+      expect(result).to include_json(build_payload)
     end
   end
 
@@ -33,7 +33,7 @@ RSpec.describe UseCases::GetScore do
     Entities::Game.new(attributes)
   end
 
-  def build_payload(game)
+  def build_payload
     {
       data: {
         type: "game",

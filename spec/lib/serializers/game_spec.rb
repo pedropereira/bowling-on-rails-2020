@@ -10,7 +10,7 @@ RSpec.describe Serializers::Json::Game do
 
       result = serializer.to
 
-      expect(result).to eq(build_payload(game))
+      expect(result).to include_json(build_payload)
     end
   end
 
@@ -34,14 +34,9 @@ RSpec.describe Serializers::Json::Game do
     Entities::Game.new(attributes)
   end
 
-  def build_payload(game)
-    game_id = game.id
-    frame_id = game.frames.first.id
-    roll_id = game.frames.first.rolls.first.id
-
+  def build_payload
     {
       data: {
-        id: game_id,
         type: "game",
         attributes: {
           state: "ongoing",
@@ -51,7 +46,6 @@ RSpec.describe Serializers::Json::Game do
           frames: {
             data: [
               {
-                id: frame_id,
                 type: "frame",
                 attributes: {
                   score: 0
@@ -60,7 +54,6 @@ RSpec.describe Serializers::Json::Game do
                   rolls: {
                     data: [
                       {
-                        id: roll_id,
                         type: "roll",
                         attributes: {
                           pins: 10
